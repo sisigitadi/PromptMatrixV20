@@ -844,43 +844,58 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
             )}
           </div>
         )}
-        {compType === "boolean" && (
+        {compType === "select" && (
           <div className="d-flex align-items-center">
-            <Form.Check
-              type="checkbox"
-              id={compName}
-              name={compName}
-              label={compLabel}
-              checked={!!formData[compName]}
-              onChange={(e) =>
-                handleInputChangeWithValidation(
-                  compName,
-                  e.target.checked,
-                  inputDetails,
-                )
-              }
-              onMouseEnter={() => setHoveredField(compName)}
-              onMouseLeave={() => setHoveredField(null)}
-              isInvalid={
-                touchedFields[compName] && !!validationErrors[compName]
-              }
-              aria-invalid={
-                touchedFields[compName] && !!validationErrors[compName]
-                  ? "true"
-                  : "false"
-              }
-              aria-describedby={
-                touchedFields[compName] && !!validationErrors[compName]
-                  ? `validation-feedback-${compName}`
-                  : undefined
-              }
-            />
-            <Form.Control.Feedback
-              type="invalid"
-              id={`validation-feedback-${compName}`}
-            >
-              {validationErrors[compName]}
-            </Form.Control.Feedback>
+            <InputGroup className="flex-grow-1">
+              <OverlayTrigger
+                placement="right"
+                overlay={
+                  <Tooltip id={`tooltip-error-${compName}`}>
+                    {validationErrors[compName]}
+                  </Tooltip>
+                }
+                show={touchedFields[compName] && !!validationErrors[compName]}
+              >
+                <Form.Select
+                  name={compName}
+                  value={formData[compName] || ""}
+                  onChange={(e) =>
+                    handleInputChangeWithValidation(
+                      compName,
+                      e.target.value,
+                      inputDetails,
+                    )
+                  }
+                  onMouseEnter={() => setHoveredField(compName)}
+                  onMouseLeave={() => setHoveredField(null)}
+                  isInvalid={
+                    touchedFields[compName] && !!validationErrors[compName]
+                  }
+                  aria-invalid={
+                    touchedFields[compName] && !!validationErrors[compName]
+                      ? "true"
+                      : "false"
+                  }
+                  aria-describedby={
+                    touchedFields[compName] && !!validationErrors[compName]
+                      ? `validation-feedback-${compName}`
+                      : undefined
+                  }
+                >
+                  {compOptions?.map((option: string) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Form.Select>
+              </OverlayTrigger>
+              <Form.Control.Feedback
+                type="invalid"
+                id={`validation-feedback-${compName}`}
+              >
+                {validationErrors[compName]}
+              </Form.Control.Feedback>
+            </InputGroup>
           </div>
         )}
         {compType === "boolean" && (
@@ -1028,7 +1043,10 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                     onChange={(e) =>
                       handleInputChangeWithValidation(
                         compName,
-                        Array.from(e.target.selectedOptions, (option) => option.value),
+                        Array.from(
+                          e.target.selectedOptions,
+                          (option) => option.value,
+                        ),
                         inputDetails,
                       )
                     }

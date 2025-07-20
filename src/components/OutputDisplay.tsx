@@ -141,7 +141,6 @@ const OutputDisplay: React.FC<OutputDisplayProps> = ({
         editableOutput,
         selectedModel,
         generationConfig,
-        imageData,
       );
 
       if (apiResult.error) {
