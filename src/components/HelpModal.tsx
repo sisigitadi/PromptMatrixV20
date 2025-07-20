@@ -11,15 +11,6 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
   const [markdownContent, setMarkdownContent] = useState<string | null>(null);
   const [documentTitle, setDocumentTitle] = useState<string | null>(null);
 
-  // Local showToast function for HelpModal
-  const showToast = (message: string, type: "success" | "error") => {
-    console.log(`Toast (${type}): ${message}`);
-    // For demonstration, we'll just use an alert for errors
-    if (type === "error") {
-      alert(message);
-    }
-  };
-
   const loadMarkdown = async (filePath: string, title: string) => {
     try {
       const response = await fetch(`${import.meta.env.BASE_URL}${filePath}`);
