@@ -72,13 +72,13 @@ const App = () => {
   });
   const [logoClickCount, setLogoClickCount] = useState(0);
   const [showDevMode, setShowDevMode] = useState<boolean>(() => {
-    return sessionStorage.getItem('showDevMode') === 'true';
+    return localStorage.getItem('showDevMode') === 'true';
   });
   const [isApiKeyEnabled, setIsApiKeyEnabled] = useState<boolean>(() => {
-    return sessionStorage.getItem('isApiKeyEnabled') === 'true';
+    return localStorage.getItem('isApiKeyEnabled') === 'true';
   });
   const [apiKey, setApiKey] = useState<string>(() => {
-    return sessionStorage.getItem('apiKey') || '';
+    return localStorage.getItem('apiKey') || '';
   });
   
   const [showSavedPrompts, setShowSavedPrompts] = useState(false); // State for showing saved prompts modal
@@ -169,7 +169,7 @@ const App = () => {
     } else {
       setAppBackgroundColor('var(--background-color)'); // Default color
     }
-    sessionStorage.setItem('showDevMode', String(showDevMode));
+    localStorage.setItem('showDevMode', String(showDevMode));
   }, [showDevMode]);
 
   useEffect(() => {
@@ -190,10 +190,14 @@ const App = () => {
     sessionStorage.setItem('selectedModel', selectedModel);
   }, [selectedModel]);
 
+  useEffect(() => {
+    localStorage.setItem('apiKey', apiKey);
+  }, [apiKey]);
+
   
 
   useEffect(() => {
-    sessionStorage.setItem('isApiKeyEnabled', String(isApiKeyEnabled));
+    localStorage.setItem('isApiKeyEnabled', String(isApiKeyEnabled));
   }, [isApiKeyEnabled]);
 
   const [savedPrompts, setSavedPrompts] = useState<any[]>(() => {
