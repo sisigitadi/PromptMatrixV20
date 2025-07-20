@@ -540,6 +540,86 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
             )}
           </div>
         )}
+        {compType === "color" && (
+          <div className="d-flex align-items-center">
+            <InputGroup className="flex-grow-1">
+              <OverlayTrigger
+                placement="right"
+                overlay={
+                  <Tooltip id={`tooltip-error-${compName}`}>
+                    {validationErrors[compName]}
+                  </Tooltip>
+                }
+                show={touchedFields[compName] && !!validationErrors[compName]}
+              >
+                <Form.Control
+                  type="color"
+                  name={compName}
+                  placeholder={compPlaceholder}
+                  value={formData[compName] || ""}
+                  onChange={(e) =>
+                    handleInputChangeWithValidation(
+                      compName,
+                      e.target.value,
+                      inputDetails,
+                    )
+                  }
+                  onMouseEnter={() => setHoveredField(compName)}
+                  onMouseLeave={() => setHoveredField(null)}
+                  isInvalid={
+                    touchedFields[compName] && !!validationErrors[compName]
+                  }
+                  aria-invalid={
+                    touchedFields[compName] && !!validationErrors[compName]
+                      ? "true"
+                      : "false"
+                  }
+                  aria-describedby={
+                    touchedFields[compName] && !!validationErrors[compName]
+                      ? `validation-feedback-${compName}`
+                      : undefined
+                  }
+                />
+              </OverlayTrigger>
+              {formData[compName] && (
+                <Button
+                  variant="outline-secondary"
+                  onClick={() => handleClearInput(compName, inputDetails)}
+                  title="Hapus Input"
+                >
+                  <FaTimesCircle />
+                </Button>
+              )}
+              <Form.Control.Feedback
+                type="invalid"
+                id={`validation-feedback-${compName}`}
+              >
+                {validationErrors[compName]}
+              </Form.Control.Feedback>
+            </InputGroup>
+            {showDevMode && (
+              <Button
+                variant="outline-secondary"
+                onClick={() =>
+                  handleAiAssist(
+                    compName,
+                    formData[compName] || "",
+                    inputDetails,
+                  )
+                }
+                disabled={isAiAssisting[compName]}
+                title="AI Assist"
+                className="ms-2"
+              >
+                {isAiAssisting[compName] ? (
+                  <Spinner as="span" animation="border" size="sm" />
+                ) : (
+                  <FaMagic />
+                )}
+              </Button>
+            )}
+          </div>
+        )}
         {compType === "select" && (
           <div className="w-100">
             <OverlayTrigger
