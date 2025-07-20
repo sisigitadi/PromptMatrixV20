@@ -12,6 +12,8 @@ export default defineConfig(({ mode }) => {
       resolve: {
         alias: {
           '@': path.resolve(__dirname, '.'),
+          'react': 'react',
+          'react-dom': 'react-dom',
         }
       },
       build: {
