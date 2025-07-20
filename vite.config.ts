@@ -40,6 +40,9 @@ export default defineConfig(({ mode }) => {
         },
       },
       base: '/PromptMatrixV20/',
+      optimizeDeps: {
+        include: ['react', 'react-dom'],
+      },
       plugins: [
         visualizer({
           filename: './dist/bundle-analyzer.html',
