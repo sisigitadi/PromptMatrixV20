@@ -109,6 +109,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
       name: string,
       value: string,
       details: any,
+      compType: string,
     ) => {
       console.log("handleAiAssist - API Key Check:", {
         apiKey,
@@ -139,8 +140,27 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
 
       const aiPrompt = `Anda adalah asisten prompt engineering. Tugas Anda adalah membantu pengguna mengisi atau menyempurnakan bagian dari prompt mereka.\n\nKerangka Kerja Saat Ini:\nNama: ${currentFramework?.nama_kerangka || "N/A"}\nDeskripsi: ${currentFramework?.description || "N/A"}\n\nKomponen yang sedang diisi:\nJudul Komponen: "${compLabel}"\nDeskripsi Variabel: "${details.description}"\nContoh/Placeholder: "${compPlaceholder || "N/A"}"\n\nIni adalah bagian dari kerangka kerja prompt dengan:\nPERAN: ${role}\nKONTEKS: ${context}\nTUGAS: ${task}\n\nLogika AI untuk kerangka kerja ini adalah: "${aiLogic}"\nPerspektif pengguna untuk kerangka kerja ini adalah: "${userPerspective}"\n\nTeks saat ini di bidang ini adalah: "${value}".\n\nInstruksi:\n- Fokuskan respons Anda secara strikt pada variabel "${details.description}" dan judul komponen "${compLabel}" dalam konteks kerangka kerja ini.\n- Jika teks saat ini kosong, hasilkan teks yang relevan dan sesuai dengan deskripsi variabel, judul komponen, dan konteks kerangka kerja.\n- Jika teks saat ini tidak kosong, perbaiki, perluas, atau sempurnakan teks ini agar lebih baik, lebih lengkap, dan sesuai dengan deskripsi variabel, judul komponen, dan konteks kerangka kerja.\n- Berikan hanya teks yang disarankan, tanpa penjelasan tambahan atau pembuka/penutup.\n- Pastikan output Anda langsung dapat digunakan sebagai nilai untuk bidang input ini.\n`;
 
+      let imagePayload = undefined;
+      if (compType === "image" || compType === "file") {
+        if (value && typeof value === "string" && value.startsWith("data:")) {
+          const parts = value.split(";base64,");
+          if (parts.length === 2) {
+            imagePayload = {
+              mimeType: parts[0].substring("data:".length),
+              data: parts[1],
+            };
+          }
+        }
+      }
+
       try {
-        const response = await callGeminiApi(apiKey, aiPrompt, selectedModel);
+        const response = await callGeminiApi(
+          apiKey,
+          aiPrompt,
+          selectedModel,
+          undefined,
+          imagePayload,
+        );
         handleInputChangeWithValidation(name, response, details);
       } catch (error) {
         console.error("AI Assist Error:", error);
@@ -285,6 +305,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                     compName,
                     formData[compName] || "",
                     inputDetails,
+                    compType,
                   )
                 }
                 disabled={isAiAssisting[compName]}
@@ -365,6 +386,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                     compName,
                     formData[compName] || "",
                     inputDetails,
+                    compType,
                   )
                 }
                 disabled={isAiAssisting[compName]}
@@ -449,6 +471,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                     compName,
                     formData[compName] || "",
                     inputDetails,
+                    compType,
                   )
                 }
                 disabled={isAiAssisting[compName]}
@@ -525,6 +548,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                     compName,
                     formData[compName] || "",
                     inputDetails,
+                    compType,
                   )
                 }
                 disabled={isAiAssisting[compName]}
@@ -605,6 +629,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                     compName,
                     formData[compName] || "",
                     inputDetails,
+                    compType,
                   )
                 }
                 disabled={isAiAssisting[compName]}
@@ -685,6 +710,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                     compName,
                     formData[compName] || "",
                     inputDetails,
+                    compType,
                   )
                 }
                 disabled={isAiAssisting[compName]}
@@ -757,6 +783,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                     compName,
                     formData[compName] || "",
                     inputDetails,
+                    compType,
                   )
                 }
                 disabled={isAiAssisting[compName]}
@@ -829,6 +856,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                     compName,
                     formData[compName] || "",
                     inputDetails,
+                    compType,
                   )
                 }
                 disabled={isAiAssisting[compName]}
@@ -1006,6 +1034,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                     compName,
                     formData[compName] || "",
                     inputDetails,
+                    compType,
                   )
                 }
                 disabled={isAiAssisting[compName]}
