@@ -76,9 +76,6 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
   const [isAiAssisting, setIsAiAssisting] = useState<{
     [key: string]: boolean;
   }>({});
-  useState<{
-    [key: string]: boolean;
-  }>({});
 
   const [hoveredField, setHoveredField] = useState<string | null>(null);
 
@@ -233,11 +230,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                     {validationErrors[compName]}
                   </Tooltip>
                 }
-                show={
-                  (touchedFields[compName] && !!validationErrors[compName]) ||
-                  showTemporaryTooltip[compName] ||
-                  (hoveredField === compName && !!validationErrors[compName])
-                }
+                show={touchedFields[compName] && !!validationErrors[compName]}
               >
                 <Form.Control
                   as="textarea"
@@ -451,9 +444,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                         </Tooltip>
                       }
                       show={
-                        (touchedFields[compName] &&
-                          !!validationErrors[compName]) ||
-                        showTemporaryTooltip[compName]
+                        touchedFields[compName] && !!validationErrors[compName]
                       }
                     >
                       <Form.Control
