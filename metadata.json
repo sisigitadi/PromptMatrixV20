@@ -1,0 +1,6 @@
+{
+  "name": "JSON Prompt Generator V2",
+  "description": "An app to generate structured JSON prompts for AI, with categories for text, media, and music.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}

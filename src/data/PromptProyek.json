@@ -1,0 +1,29 @@
+{
+  "Kreasi Digital Personal & Acara": {
+    "Generator Undangan & Kartu Acara Dinamis": {
+      "description": "Buat undangan atau kartu ucapan untuk berbagai keperluan, dari pernikahan hingga bisnis.",
+      "toolType": "text",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Perancang Undangan. AI akan menganalisis jenis acara untuk mengadopsi persona yang sesuai (Perencana Pernikahan, Asisten Eksekutif, dll.) dan menyusun teks dengan nada dan format yang tepat, menghasilkan undangan atau kartu ucapan yang dinamis dan personal.",
+      "components": [
+        { "name": "eventType", "label": "Jenis Acara", "type": "select", "options": ["Pernikahan", "Bisnis/Resmi", "Ulang Tahun/Personal", "Workshop/Komunitas", "Terima Kasih"], "info": "Pilih jenis acara untuk menentukan format dan nada.", "validation": { "regex": "^(?!Pilih Jenis Acara...).*$" } }
+      ],
+      "dynamicSubcomponents": {
+        "trigger": "eventType",
+        "options": {
+          "Pernikahan": [
+            { "name": "coupleNames", "label": "Nama Pasangan", "type": "text", "placeholder": "e.g., 'Sarah & David'", "info": "Nama kedua mempelai.", "validation": { "min_length": 3 } },
+            { "name": "hosting_info", "label": "Penyelenggara Acara", "type": "text", "placeholder": "e.g., 'Bersama kedua orang tua'", "info": "Siapa yang mengundang? (misal: 'Mr. & Mrs. Budiman mengundang...')", "validation": { "min_length": 3 } },
+            { "name": "weddingStyle", "label": "Gaya Pernikahan", "type": "select", "options": ["Formal & Tradisional", "Modern & Minimalis", "Rustic & Santai", "Bohemian & Unik"], "info": "Gaya keseluruhan akan mempengaruhi pilihan kata." },
+            { "name": "ceremonyDateTime", "label": "Tanggal & Waktu Akad/Pemberkatan", "type": "text", "placeholder": "e.g., 'Sabtu, 28 Desember 2025, Pukul 09:00'", "info": "Waktu untuk acara inti.", "validation": { "min_length": 3 } },
+            { "name": "ceremonyLocation", "label": "Lokasi Akad/Pemberkatan", "type": "text", "placeholder": "e.g., 'Masjid Istiqlal, Jakarta'", "info": "Tempat acara inti.", "validation": { "min_length": 3 } },
+            { "name": "receptionDateTime", "label": "Tanggal & Waktu Resepsi", "type": "text", "placeholder": "e.g., 'Sabtu, 28 Desember 2025, Pukul 19:00'", "info": "Waktu untuk perayaan.", "validation": { "min_length": 3 } },
+            { "name": "receptionLocation", "label": "Lokasi Resepsi", "type": "text", "placeholder": "e.g., 'Gedung Serbaguna ABC, Jl. Merdeka No. 123'", "info": "Tempat perayaan.", "validation": { "min_length": 3 } },
+            { "name": "dressCode", "label": "Aturan Berpakaian (Dress Code)", "type": "text", "placeholder": "e.g., 'Batik, Jas Formal'", "info": "Pakaian yang disarankan untuk tamu.", "validation": { "min_length": 3 } },
+            { "name": "rsvpInfo", "label": "Informasi RSVP", "type": "text", "placeholder": "e.g., 'Mohon konfirmasi ke 0812-3456-7890 (WhatsApp) sebelum 1 Desember'", "info": "Cara dan batas waktu konfirmasi kehadiran.", "validation": { "min_length": 3 } },
+            { "name": "googleMapsLink", "label": "Tautan Google Maps", "type": "text", "placeholder": "e.g., 'https://maps.app.goo.gl/xyz'", "info": "Tautan Google Maps untuk lokasi acara." }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "Alat Bantu Komposisi": {
+    "Penulisan Lirik Lagu": {
+      "description": "Buat lirik untuk lagu dengan struktur dan nuansa tertentu.",
+      "toolType": "music-composition",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Penulis Lirik Profesional. AI akan menginterpretasikan lirik dan gaya musik yang diberikan untuk menghasilkan komposisi lagu yang kohesif, termasuk melodi dan vokal yang sesuai.",
+      "components": [
+        { "name": "genre", "label": "Genre Musik", "type": "select", "options": ["Pop", "Rock", "R&B", "Folk", "Hip-Hop", "Electronic", "Lainnya..."] , "info": "Genre akan mempengaruhi gaya bahasa dan struktur lirik."},
+        { "name": "theme", "label": "Tema Lagu", "type": "text", "placeholder": "e.g., 'cinta pertama, patah hati, perjalanan hidup, protes sosial'", "info": "Gagasan atau cerita utama di balik lagu."},
+        { "name": "mood", "label": "Suasana Hati Lagu", "type": "select", "options": ["Senang & Ceria", "Sedih & Melankolis", "Energik & Memotivasi", "Marah & Frustrasi", "Romantis & Intim", "Lainnya..."] , "info": "Emosi utama yang ingin disampaikan melalui lirik."},
+        { "name": "structure", "label": "Struktur Lagu (Opsional)", "type": "text", "placeholder": "e.g., 'Verse-Chorus-Verse-Chorus-Bridge-Chorus'", "info": "Tentukan urutan bagian-bagian lagu jika Anda punya preferensi."},
+        { "name": "keyElements", "label": "Elemen/Kata Kunci Wajib", "type": "textarea", "placeholder": "e.g., 'sebutkan kata 'bintang', 'malam', 'harapan''", "info": "Gambar, kata, atau frasa spesifik yang harus ada dalam lirik."},
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Gunakan banyak metafora alam (laut, gunung, hutan). Hindari rima yang terlalu klise. Cerita harus berkembang dari sedih menjadi penuh harapan di bagian akhir.", "info": "Detail artistik atau batasan kreatif untuk AI. Misalnya, penggunaan metafora atau majas tertentu."}
+      ]
+    },
+    "Ide Progresi Kord": {
+      "description": "Hasilkan ide progresi kord berdasarkan genre dan mood.",
+      "toolType": "music-composition",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Komposer Musik Ahli. AI akan menghasilkan ide progresi kord berdasarkan genre, mood, kunci nada, dan tingkat kompleksitas yang diinginkan, dengan fokus pada menciptakan harmoni yang sesuai dan menarik.",
+      "components": [
+        { "name": "genre", "label": "Genre Musik", "type": "select", "options": ["Blues", "Jazz", "Pop Ballad", "Rock Alternatif", "Sinematik", "Lainnya..."] , "info": "Genre seringkali memiliki progresi kord yang khas."},
+        { "name": "mood", "label": "Mood yang Diinginkan", "type": "select", "options": ["Ceria & Terang", "Sedih & Minor", "Misterius & Tegang", "Tenang & Damai", "Epik & Megah", "Lainnya..."] , "info": "Pilihan kord (mayor/minor/dll) akan sangat dipengaruhi oleh mood."},
+        { "name": "key", "label": "Kunci Nada (Opsional)", "type": "text", "placeholder": "e.g., 'C Major, A minor'", "info": "Menentukan 'rumah' atau pusat tonal dari progresi."},
+        { "name": "complexity", "label": "Tingkat Kompleksitas Kord", "type": "select", "options": ["Sederhana (3-4 kord dasar)", "Menengah (dengan kord ke-7)", "Kompleks (dengan kord ekstensi/substitusi)", "Lainnya..."] , "info": "'Sederhana' untuk lagu pop, 'Kompleks' mungkin menyertakan kord 7, 9, atau substitusi."},
+        { "name": "partOfSong", "label": "Untuk Bagian Lagu Mana?", "type": "select", "options": ["Verse", "Chorus", "Bridge", "Semua Bagian", "Lainnya..."] , "info": "Progresi untuk chorus biasanya lebih kuat dan 'catchy' daripada verse."},
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Sertakan setidaknya satu kord pinjaman dari minor paralel. Progresi harus cocok untuk dimainkan dengan gitar akustik. Buat bagian bridge yang terasa 'mengawang'.", "info": "Instruksi teknis atau artistik tambahan untuk progresi kord yang dihasilkan."}
+      ]
+    }
+  },
+  "Prompt AI Musik & Audio": {
+    "Suno AI": {
+      "description": "Buat lagu lengkap dengan vokal dari deskripsi teks menggunakan Suno AI.",
+      "toolType": "music-generation",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Produser Musik AI. AI akan menginterpretasikan lirik dan gaya musik yang diberikan untuk menghasilkan komposisi lagu yang kohesif, termasuk melodi dan vokal yang sesuai, dengan fokus pada kualitas produksi dan kreativitas.",
+      "components": [
+        { "name": "lyrics", "label": "Lirik Lagu", "type": "textarea", "placeholder": "e.g., '[Verse 1]\nWalking through the city lights\n[Chorus]\nOh, I feel so alive tonight'", "info": "Masukkan lirik lengkap dengan penanda bagian seperti [Verse] dan [Chorus]. Atau biarkan kosong dan jelaskan di deskripsi gaya."},
+        { "name": "model", "label": "Model", "type": "select", "options": ["v3.5", "v3.5-turbo", "v4-alpha", "chirp-v3"] , "info": "Pilih versi model Suno AI yang akan digunakan."},
+        { "name": "instrumental", "label": "Instrumental?", "type": "select", "options": ["Tidak", "Ya"] , "info": "Pilih 'Ya' jika Anda hanya ingin musik tanpa vokal."},
+        { "name": "styleOfMusic", "label": "Gaya Musik", "type": "text", "placeholder": "e.g., 'acoustic pop', '80s synthwave with female vocal', 'epic cinematic orchestral'", "info": "Deskripsikan genre, mood, instrumen, dan tipe vokal yang Anda inginkan."},
+        { "name": "makeInstrumental", "label": "Buat Versi Instrumental?", "type": "select", "options": ["Tidak", "Ya"] , "info": "Pilih 'Ya' jika Anda hanya ingin musik tanpa vokal."},
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Gunakan gaya bahasa yang sangat personal dan rentan. Sertakan satu analogi tentang berkebun. Akhiri dengan nada yang penuh harapan. Untuk hasil terbaik, gunakan model v3.5 atau v3.5-turbo.", "info": "Instruksi spesifik tentang gaya, nada, atau elemen naratif yang harus ada."}
+        ]
+      },
+      "Udio": {
+        "description": "Buat prompt untuk Udio, yang dikenal dengan kualitas audio dan fleksibilitas gayanya.",
+        "toolType": "music-generation",
+        "ai_logic_description": "Persona AI: Anda adalah seorang Komposer Audio Kreatif. AI akan menghasilkan musik berdasarkan prompt deskriptif dan lirik (jika disediakan), dengan fokus pada kualitas audio dan fleksibilitas gaya yang menjadi ciri khas Udio.",
+        "components": [
+          { "name": "prompt", "label": "Prompt Deskriptif", "type": "textarea", "placeholder": "e.g., 'A soulful blues track about a long road trip, with harmonica solos, male vocals, and a steady drum beat'", "info": "Deskripsikan musik Anda secara detail, termasuk genre, instrumen, mood, dan tema."},
+          { "name": "lyrics", "label": "Lirik (Opsional)", "type": "textarea", "placeholder": "e.g., '[Verse]\nSunrise on the highway...'", "info": "Masukkan lirik jika Anda punya, atau biarkan Udio yang membuatnya."},
+          { "name": "instrumental", "label": "Instrumental?", "type": "select", "options": ["Tidak", "Ya"] , "info": "Pilih 'Ya' untuk membuat lagu tanpa vokal."},
+          { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Berikan batasan atau instruksi spesifik untuk memandu AI.", "info": "Sebutkan batasan, gaya penulisan spesifik, atau informasi latar yang penting untuk dipahami AI."}
+        ]
+      },
+      "Stable Audio": {
+        "description": "Hasilkan audio, efek suara, atau musik instrumental berkualitas tinggi dari deskripsi teks.",
+        "toolType": "audio-generation",
+        "ai_logic_description": "Persona AI: Anda adalah seorang Insinyur Audio AI. AI akan menghasilkan audio, efek suara, atau musik instrumental berkualitas tinggi dari deskripsi teks, dengan fokus pada genre, mood, instrumen, dan BPM yang ditentukan, serta mengoptimalkan kualitas suara.",
+        "components": [
+          { "name": "prompt", "label": "Deskripsi Audio", "type": "textarea", "placeholder": "e.g., 'A cinematic soundtrack with a powerful orchestra, epic drums, and a choir. 120 BPM. Dramatic, adventurous.'", "info": "Jelaskan suara yang Anda inginkan. Sertakan genre, mood, instrumen, dan BPM."},
+          { "name": "negativePrompt", "label": "Prompt Negatif (Opsional)", "type": "text", "placeholder": "e.g., 'low quality, noisy, distorted'", "info": "Suara atau kualitas yang ingin Anda hindari."},
+          { "name": "duration", "label": "Durasi (detik)", "type": "number", "placeholder": "e.g., 45", "info": "Panjang klip audio yang diinginkan."},
+          { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Berikan batasan atau instruksi spesifik untuk memandu AI.", "info": "Sebutkan batasan, gaya penulisan spesifik, atau informasi latar yang penting untuk dipahami AI."}
+        ]
+      },
+      "MusicFX (Google)": {
+        "description": "Eksplorasi ide musik dengan cepat menggunakan model MusicLM from Google.",
+        "toolType": "music-generation",
+        "ai_logic_description": "Persona AI: Anda adalah seorang Eksplorator Musik Cepat. AI akan menghasilkan ide musik berdasarkan prompt deskriptif, dengan fokus pada mood, genre, dan instrumen, memanfaatkan model MusicLM untuk eksplorasi cepat dan kreatif.",
+        "components": [
+          { "name": "prompt", "label": "Prompt Deskriptif", "type": "textarea", "placeholder": "e.g., 'lo-fi chill beat for studying', 'reggae song with a catchy bassline', 'epic rock anthem with electric guitar solos'", "info": "Deskripsikan musik yang ingin Anda buat dengan fokus pada mood, genre, dan instrumen."},
+          { "name": "duration", "label": "Durasi (detik)", "type": "select", "options": ["30", "50", "70"] , "info": "Pilih panjang loop musik yang akan dihasilkan."},
+          { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Berikan batasan atau instruksi spesifik untuk memandu AI.", "info": "Sebutkan batasan, gaya penulisan spesifik, atau informasi latar yang penting untuk dipahami AI."}
+        ]
+      },
+      "Mubert": {
+        "description": "Hasilkan musik fungsional bebas royalti berdasarkan durasi, mood, atau aktivitas.",
+        "toolType": "music-generation",
+        "ai_logic_description": "Persona AI: Anda adalah seorang Kurator Musik Fungsional. AI akan menghasilkan musik fungsional bebas royalti berdasarkan durasi, mood, atau aktivitas yang ditentukan, dengan fokus pada kebutuhan spesifik pengguna dan kualitas audio yang optimal.",
+        "components": [
+          { "name": "prompt", "label": "Prompt (Genre, Mood, atau Aktivitas)", "type": "text", "placeholder": "e.g., 'techno', 'melancholic', 'workout', 'gaming'", "info": "Deskripsikan jenis musik yang Anda butuhkan dalam satu kata atau frasa singkat."},
+          { "name": "duration", "label": "Durasi (menit)", "type": "number", "placeholder": "e.g., 5", "info": "Tentukan panjang trek musik yang Anda inginkan."},
+          { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Berikan batasan atau instruksi spesifik untuk memandu AI.", "info": "Sebutkan batasan, gaya penulisan spesifik, atau informasi latar yang penting untuk dipahami AI."}
+        ]
+      }
+    }
+  }
+}

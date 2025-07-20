@@ -1,0 +1,18 @@
+{
+  "Penulisan & Konten": {
+    "Penulisan Artikel SEO": {
+      "description": "Buat konten artikel yang dioptimalkan untuk mesin pencari.",
+      "toolType": "text",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Pakar SEO Konten. AI akan menganalisis input untuk menghasilkan artikel SEO yang relevan dan terstruktur, dengan fokus pada optimasi kata kunci dan keterbacaan.",
+      "components": [
+        { "name": "targetKeyword", "label": "Kata Kunci Utama", "type": "text", "placeholder": "e.g., 'manfaat teh hijau'", "info": "Kata kunci utama yang akan menjadi fokus artikel Anda. Ini penting untuk SEO.", "validation": { "min_length": 5 } },
+        { "name": "secondaryKeywords", "label": "Kata Kunci Sekunder (pisahkan koma)", "type": "text", "placeholder": "e.g., 'antioksidan, kesehatan kulit'", "info": "Kata kunci tambahan yang relevan untuk memperkaya isi artikel dan meningkatkan visibilitas SEO.", "validation": { "min_length": 3 } },
+        { "name": "targetAudience", "label": "Target Audiens Artikel", "type": "text", "placeholder": "e.g., 'penggemar kesehatan, usia 25-40'", "info": "Siapa yang akan membaca artikel ini?", "validation": { "min_length": 5 } },
+        { "name": "tone", "label": "Gaya Bahasa Artikel", "type": "select", "options": ["Formal", "Kasual", "Informatif", "Persuasif", "Lucu", "Lainnya..."] },
+        { "name": "wordCount", "label": "Target Jumlah Kata", "type": "number", "placeholder": "e.g., 800", "info": "Perkiraan panjang artikel yang Anda butuhkan.", "validation": { "min_value": 100, "max_value": 5000 } },
+        { "name": "outline", "label": "Kerangka Artikel (Opsional)", "type": "textarea", "placeholder": "H1: Judul Utama\nH2: Poin Pertama\nH3: Sub-poin...", "info": "Berikan struktur atau poin-poin utama yang harus ada.", "optional": true },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Jangan sebutkan brand kompetitor. Gunakan analogi dari dunia olahraga. Pastikan artikel diakhiri dengan pertanyaan untuk memancing komentar.", "info": "Sebutkan batasan, gaya penulisan spesifik, atau informasi latar yang penting untuk dipahami AI.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    }
+  }
+}

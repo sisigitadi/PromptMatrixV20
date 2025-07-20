@@ -1,0 +1,246 @@
+{
+  "Perencanaan Video & Visual": {
+    "Ide Konten Video": {
+      "description": "Hasilkan ide-ide video yang menarik untuk platform media sosial.",
+      "toolType": "text",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Strategis Konten Video. AI akan menghasilkan ide-ide video yang menarik dan relevan dengan platform, niche, format, dan tujuan yang diinginkan, dengan fokus pada peningkatan engagement dan pencapaian target pengguna.",
+      "components": [
+        { "name": "platform", "label": "Platform Video", "type": "select", "options": ["YouTube", "TikTok", "Instagram Reels", "LinkedIn Video", "Lainnya..."], "info": "Platform menentukan format, durasi, dan gaya konten." },
+        { "name": "niche", "label": "Niche / Tema Channel", "type": "text", "placeholder": "e.g., 'memasak untuk pemula, review gadget, keuangan pribadi'", "info": "Fokus utama dari channel atau akun Anda." },
+        { "name": "videoFormat", "label": "Format Video", "type": "select", "options": ["Tutorial / How-to", "Vlog Harian/Mingguan", "Review Produk/Jasa", "Listicle (e.g., Top 5...)", "Edukasi Singkat / Explainer", "Wawancara", "Lainnya..."], "info": "Pilih jenis struktur video yang diinginkan." },
+        { "name": "desiredOutcome", "label": "Tujuan Video", "type": "textarea", "placeholder": "e.g., 'meningkatkan subscriber, mendapatkan engagement tinggi, mengarahkan trafik ke website'", "info": "Apa hasil yang ingin Anda capai dengan video ini?" },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Saya ingin ide yang bisa dikolaborasikan dengan kreator lain. Fokus pada budget produksi rendah. Hindari topik politik.", "info": "Detail tambahan yang bisa mengarahkan ide AI menjadi lebih unik dan sesuai dengan channel Anda." }
+      ]
+    },
+    "Script Iklan": {
+      "description": "Buat naskah singkat untuk iklan video atau audio.",
+      "toolType": "text",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Penulis Naskah Iklan. AI akan membuat naskah iklan yang singkat dan persuasif, dengan mempertimbangkan produk, target audiens, durasi, pesan kunci, dan platform penayangan untuk memaksimalkan dampak iklan.",
+      "components": [
+        { "name": "product", "label": "Produk/Jasa yang Diiklankan", "type": "text", "placeholder": "e.g., 'Aplikasi Belajar Bahasa Asing'", "info": "Produk yang menjadi fokus utama iklan." },
+        { "name": "targetAudience", "label": "Target Audiens Iklan", "type": "text", "placeholder": "e.g., 'mahasiswa, profesional muda, orang tua'", "info": "Siapa yang ingin Anda jangkau dengan iklan ini?" },
+        { "name": "duration", "label": "Durasi Iklan (detik)", "type": "number", "placeholder": "e.g., 30", "info": "Durasi akan sangat mempengaruhi kepadatan naskah." },
+        { "name": "keyMessage", "label": "Pesan Kunci Iklan", "type": "textarea", "placeholder": "e.g., 'Belajar bahasa jadi mudah dan menyenangkan di mana saja.'", "info": "Satu hal terpenting yang harus diingat audiens setelah melihat iklan." },
+        { "name": "platform", "label": "Platform Penayangan", "type": "select", "options": ["TV", "Radio", "YouTube (Pre-roll)", "TikTok/Reels/Shorts", "Lainnya..."], "info": "Platform akan mempengaruhi gaya dan kecepatan naskah." },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Tempo harus cepat dan energik. Sertakan anjuran untuk sound effect 'swoosh' saat produk muncul. Aktor harus terdengar antusias dan percaya diri.", "info": "Instruksi tentang nuansa, tempo, atau elemen audio/visual yang harus dibayangkan oleh AI." }
+      ]
+    }
+  },
+  "Prompt AI Gambar (Text-to-Image)": {
+    "Midjourney": {
+      "description": "Buat prompt yang sangat detail untuk Midjourney, lengkap dengan parameter teknis untuk kontrol maksimal.",
+      "toolType": "image-generation",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Seniman Prompt Midjourney. AI akan menginterpretasikan deskripsi subjek, gaya, dan parameter teknis untuk menghasilkan prompt Midjourney yang optimal, memaksimalkan kontrol atas output visual.",
+      "components": [
+        { "name": "subject", "label": "Subjek Utama", "type": "textarea", "placeholder": "e.g., 'A hyper-detailed portrait of a futuristic cyborg knight'", "info": "Deskripsi utama dari apa yang ingin Anda lihat.", "validation": { "min_length": 20 } },
+        { "name": "style", "label": "Gaya & Estetika", "type": "textarea", "placeholder": "e.g., 'cinematic lighting, epic, photorealistic, octane render, unreal engine, 8k'", "info": "Kata kunci yang mendefinisikan gaya visual, artis, atau medium.", "validation": { "min_length": 10 } },
+        { "name": "aspectRatio", "label": "Aspect Ratio (--ar)", "type": "select", "options": ["1:1 (Square)", "2:3 (Vertical)", "3:2 (Horizontal)", "16:9 (Widescreen)", "Lainnya..."], "info": "Rasio lebar dan tinggi gambar." },
+        { "name": "version", "label": "Model Version (--v)", "type": "select", "options": ["6.0", "5.2", "5.1", "niji 5", "6.1"], "info": "Versi model Midjourney yang akan digunakan." },
+        { "name": "p", "label": "Permutations (--p)", "type": "text", "placeholder": "e.g., '{a,b,c} dog'", "info": "Membuat permutasi dari prompt, memungkinkan beberapa variasi dari satu input.", "validation": { "min_length": 3 } },
+        { "name": "chaos", "label": "Chaos (--c)", "type": "number", "placeholder": "0-100", "info": "Seberapa bervariasi dan tidak terduga hasil yang Anda inginkan? (0-100)", "validation": { "min_value": 0, "max_value": 100 } },
+        { "name": "quality", "label": "Quality (--q)", "type": "number", "placeholder": "0.25, 0.5, 1, 2", "info": "Kontrol kualitas rendering dan waktu. Nilai lebih tinggi menggunakan lebih banyak waktu GPU dan menciptakan gambar yang lebih detail. `--q 2` adalah baru di v6.1 untuk detail yang ditingkatkan.", "validation": { "min_value": 0.25, "max_value": 2 } },
+        { "name": "stylize", "label": "Stylize (--s)", "type": "number", "placeholder": "0-1000", "info": "Seberapa kuat estetika gaya Midjourney yang diterapkan? (0-1000)", "validation": { "min_value": 0, "max_value": 1000 } },
+        { "name": "weird", "label": "Weird (--w)", "type": "number", "placeholder": "0-3000", "info": "Jelajahi estetika yang tidak biasa dan eksperimental.", "validation": { "min_value": 0, "max_value": 3000 } },
+        { "name": "negativePrompt", "label": "Negative Prompt (--no)", "type": "text", "placeholder": "e.g., 'cartoon, blurry, text, watermark'", "info": "Hal-hal yang tidak Anda inginkan muncul di gambar.", "validation": { "min_length": 5 } },
+        { "name": "sref", "label": "Style Reference (--sref)", "type": "text", "placeholder": "e.g., 'URL_gambar_gaya'", "info": "URL gambar untuk referensi gaya.", "validation": { "min_length": 10 } },
+        { "name": "sw", "label": "Style Weight (--sw)", "type": "number", "placeholder": "0-1000", "info": "Seberapa kuat pengaruh referensi gaya? (Default: 100)", "validation": { "min_value": 0, "max_value": 1000 } },
+        { "name": "cref", "label": "Character Reference (--cref)", "type": "text", "placeholder": "e.g., 'URL_gambar_karakter'", "info": "URL gambar untuk menjaga konsistensi karakter.", "validation": { "min_length": 10 } },
+        { "name": "cw", "label": "Character Weight (--cw)", "type": "number", "placeholder": "0-100", "info": "Seberapa kuat pengaruh referensi karakter? (Default: 100)", "validation": { "min_value": 0, "max_value": 100 } },
+        { "name": "seed", "label": "Seed (--seed)", "type": "number", "placeholder": "0-4294967295", "info": "Gunakan seed yang sama untuk menghasilkan gambar yang mirip.", "validation": { "min_value": 0, "max_value": 4294967295 } },
+        { "name": "stop", "label": "Stop (--stop)", "type": "number", "placeholder": "10-100", "info": "Hentikan generasi pada persentase tertentu.", "validation": { "min_value": 10, "max_value": 100 } },
+        { "name": "repeat", "label": "Repeat (--r)", "type": "number", "placeholder": "1-40", "info": "Ulangi prompt beberapa kali.", "validation": { "min_value": 1, "max_value": 40 } },
+        { "name": "tile", "label": "Tile (--tile)", "type": "select", "options": ["No", "Yes"], "info": "Buat gambar yang bisa di-tile secara seamless." },
+        { "name": "styleRaw", "label": "Style Raw (--style raw)", "type": "select", "options": ["No", "Yes"], "info": "Mengurangi beautifikasi otomatis, membuat gambar lebih akurat terhadap prompt dan umumnya lebih fotorealistik. Dapat juga digunakan dengan kode gaya (misalnya, `--style raw --sref random`) untuk menerapkan estetika tertentu." }
+      ]
+    },
+    "DALL-E 3": {
+      "description": "Tulis prompt naratif dan deskriptif yang kaya untuk DALL-E 3, yang unggul dalam memahami bahasa alami.",
+      "toolType": "image-generation",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Pelukis Digital AI. AI akan memproses deskripsi naratif untuk menghasilkan gambar yang kreatif dan akurat, memanfaatkan pemahaman DALL-E 3 tentang bahasa alami dan detail kontekstual.",
+      "components": [
+        { "name": "subject", "label": "Subjek & Aksi", "type": "textarea", "placeholder": "e.g., 'Seekor rubah oranye terang dengan pakaian astronot sedang duduk di bulan, memandangi bumi.'", "info": "Jelaskan subjek utama dan apa yang sedang dilakukannya secara detail.", "validation": { "min_length": 20 } },
+        { "name": "style", "label": "Gaya Visual", "type": "text", "placeholder": "e.g., 'gaya lukisan cat minyak digital', 'seni piksel (pixel art)', 'foto sinematik'", "info": "Medium atau gaya artistik dari gambar.", "validation": { "min_length": 5 } },
+        { "name": "composition", "label": "Komposisi & Sudut Pandang", "type": "text", "placeholder": "e.g., 'close-up shot', 'wide-angle view', 'dari bawah'", "info": "Bagaimana adegan dibingkai?", "validation": { "min_length": 5 } },
+        { "name": "lightingAndMood", "label": "Pencahayaan & Suasana", "type": "text", "placeholder": "e.g., 'pencahayaan dramatis saat senja', 'suasana misterius dan berkabut'", "info": "Bagaimana pencahayaan dan emosi yang ingin Anda tangkap?", "validation": { "min_length": 5 } },
+        { "name": "colorPalette", "label": "Palet Warna", "type": "text", "placeholder": "e.g., 'warna-warna pastel yang lembut', 'monokromatik dengan aksen merah'", "info": "Warna dominan yang Anda inginkan.", "validation": { "min_length": 5 } },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Gunakan gaya bahasa yang sangat personal dan rentan. Sertakan satu analogi tentang berkebun. Akhiri dengan nada yang penuh harapan.", "info": "Instruksi spesifik tentang gaya, nada, atau elemen naratif yang harus ada.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    },
+    "Stable Diffusion": {
+      "description": "Buat prompt positif dan negatif yang terstruktur untuk kontrol mendetail pada model Stable Diffusion.",
+      "toolType": "image-generation",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Pengendali Gambar. AI akan memproses prompt positif dan negatif untuk menghasilkan gambar yang sesuai, dengan fokus pada detail dan penghindaran elemen yang tidak diinginkan, memanfaatkan kemampuan kontrol Stable Diffusion.",
+      "components": [
+        { "name": "positivePrompt", "label": "Positive Prompt", "type": "textarea", "placeholder": "e.g., '(best quality:1.2), ultra-detailed, masterpiece, a majestic lion on a rock, cinematic lighting, (photorealistic:1.3)'", "info": "Deskripsi detail dari apa yang Anda inginkan. Gunakan bobot (word:1.2) untuk penekanan.", "validation": { "min_length": 20 } },
+        { "name": "negativePrompt", "label": "Negative Prompt", "type": "textarea", "placeholder": "e.g., '(worst quality, low quality:1.4), blurry, ugly, deformed, text, watermark, extra limbs'", "info": "Deskripsi detail dari apa yang TIDAK Anda inginkan. Sangat penting untuk hasil yang bersih.", "validation": { "min_length": 10 } },
+        { "name": "technicalParameters", "label": "Parameter Teknis (untuk referensi)", "type": "text", "placeholder": "e.g., 'Sampler: DPM++ 2M Karras, CFG Scale: 7, Steps: 25, Seed: 12345'", "info": "Catat parameter teknis yang Anda gunakan di luar prompt untuk replikasi.", "optional": true, "validation": { "min_length": 5 } },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Gunakan gaya bahasa yang sangat personal dan rentan. Sertakan satu analogi tentang berkebun. Akhiri dengan nada yang penuh harapan.", "info": "Instruksi spesifik tentang gaya, nada, atau elemen naratif yang harus ada.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    },
+    "Leonardo AI": {
+      "description": "Prompt untuk Leonardo AI, dengan penekanan pada model dan elemen khasnya.",
+      "toolType": "image-generation",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Kreator Visual Leonardo. AI akan menghasilkan gambar berdasarkan prompt positif dan negatif, dengan mempertimbangkan model dan elemen khas Leonardo AI untuk menciptakan visual yang unik dan berkualitas tinggi.",
+      "components": [
+        { "name": "positivePrompt", "label": "Positive Prompt", "type": "textarea", "placeholder": "e.g., 'A beautiful fantasy world, enchanted forest, by Artgerm and Greg Rutkowski, soft lighting, high detail'", "info": "Deskripsi utama dari gambar yang diinginkan.", "validation": { "min_length": 20 } },
+        { "name": "negativePrompt", "label": "Negative Prompt", "type": "textarea", "placeholder": "e.g., 'blurry, noise, ugly, tiling, poorly drawn hands'", "info": "Hal-hal yang ingin Anda hindari dalam gambar.", "validation": { "min_length": 10 } },
+        { "name": "leonardoModel", "label": "Model Leonardo", "type": "text", "placeholder": "e.g., 'Leonardo Diffusion XL', 'DreamShaper v7'", "info": "Model spesifik yang Anda gunakan di platform Leonardo AI.", "validation": { "min_length": 5 } },
+        { "name": "leonardoElements", "label": "Elemen Leonardo (Opsional)", "type": "text", "placeholder": "e.g., 'Fantasy, Vintage, Toon'", "info": "Elemen atau gaya khusus yang disediakan oleh Leonardo AI.", "optional": true, "validation": { "min_length": 3 } },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Gunakan gaya bahasa yang sangat personal dan rentan. Sertakan satu analogi tentang berkebun. Akhiri dengan nada yang penuh harapan.", "info": "Instruksi spesifik tentang gaya, nada, atau elemen naratif yang harus ada.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    },
+    "Ideogram": {
+      "description": "Buat prompt untuk Ideogram, dengan fokus khusus pada kemampuannya merender teks di dalam gambar.",
+      "toolType": "image-generation",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Perancang Tipografi Visual. AI akan memprioritaskan rendering teks yang akurat di dalam gambar, sambil tetap mempertahankan gaya visual yang kohesif berdasarkan deskripsi adegan.",
+      "components": [
+        { "name": "textToRender", "label": "Teks untuk Ditampilkan di Gambar", "type": "text", "placeholder": "e.g., 'Selamat Datang!', 'KOPI'", "info": "Tuliskan teks persis seperti yang Anda ingin muncul di gambar.", "validation": { "min_length": 1 } },
+        { "name": "subjectAndScene", "label": "Deskripsi Adegan & Subjek", "type": "textarea", "placeholder": "e.g., 'Sebuah tanda neon menyala dengan tulisan [Teks Anda] di atas pintu masuk sebuah kafe cyberpunk.'", "info": "Jelaskan gambar yang akan menjadi latar belakang teks Anda.", "validation": { "min_length": 20 } },
+        { "name": "style", "label": "Gaya Visual", "type": "text", "placeholder": "e.g., 'typography, 3d render, cinematic, photo'", "info": "Gaya keseluruhan dari gambar dan teks.", "validation": { "min_length": 5 } },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Gunakan gaya bahasa yang sangat personal dan rentan. Sertakan satu analogi tentang berkebun. Akhiri dengan nada yang penuh harapan.", "info": "Instruksi spesifik tentang gaya, nada, atau elemen naratif yang harus ada.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    },
+    "Firefly (Adobe)": {
+      "description": "Prompt untuk Adobe Firefly, dengan penekanan pada gaya dan efek yang tersedia.",
+      "toolType": "image-generation",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Seniman Efek Digital. AI akan menerapkan gaya dan efek yang diminta pada subjek, menghasilkan gambar yang artistik dan sesuai dengan preferensi visual yang ditentukan.",
+      "components": [
+        { "name": "subject", "label": "Deskripsi Subjek", "type": "textarea", "placeholder": "e.g., 'A fluffy baby owl reading a book in a cozy library'", "info": "Deskripsi utama dari apa yang ingin Anda buat.", "validation": { "min_length": 20 } },
+        { "name": "styleAndEffects", "label": "Gaya & Efek", "type": "text", "placeholder": "e.g., 'Steampunk, synthwave, layered paper, bokeh effect'", "info": "Gaya visual, teknik, atau efek yang ingin diterapkan.", "validation": { "min_length": 5 } },
+        { "name": "colorAndTone", "label": "Warna & Nada", "type": "text", "placeholder": "e.g., 'Vibrant colors, muted tones, golden hour'", "info": "Palet warna dan suasana pencahayaan.", "validation": { "min_length": 5 } },
+        { "name": "negativePrompt", "label": "Kata Kunci Negatif", "type": "text", "placeholder": "e.g., 'dark, scary, blurry'", "info": "Hal-hal yang ingin dikecualikan dari gambar.", "optional": true, "validation": { "min_length": 5 } },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Gunakan gaya bahasa yang sangat personal dan rentan. Sertakan satu analogi tentang berkebun. Akhiri dengan nada yang penuh harapan.", "info": "Instruksi spesifik tentang gaya, nada, atau elemen naratif yang harus ada.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    },
+    "Playground AI": {
+      "description": "Buat prompt untuk Playground AI, platform yang fleksibel untuk berbagai gaya.",
+      "toolType": "image-editing",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Eksplorator Visual. AI akan menghasilkan gambar berdasarkan prompt utama dan elemen yang dikecualikan, memanfaatkan fleksibilitas Playground AI untuk berbagai gaya visual.",
+      "components": [
+        { "name": "prompt", "label": "Prompt Utama", "type": "textarea", "placeholder": "e.g., 'A majestic castle in the clouds, fantasy, hyperrealistic, epic scale'", "info": "Deskripsi utama dari gambar yang diinginkan.", "validation": { "min_length": 20 } },
+        { "name": "excludeFromImage", "label": "Kecualikan dari Gambar (Negative Prompt)", "type": "textarea", "placeholder": "e.g., 'trees, people, fog'", "info": "Hal-hal yang tidak ingin Anda lihat di hasil akhir.", "optional": true, "validation": { "min_length": 5 } },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Gunakan gaya bahasa yang sangat personal dan rentan. Sertakan satu analogi tentang berkebun. Akhiri dengan nada yang penuh harapan.", "info": "Instruksi spesifik tentang gaya, nada, atau elemen naratif yang harus ada.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    },
+    "NightCafe": {
+      "description": "Buat prompt untuk NightCafe Creator, dengan mempertimbangkan model dan preset gayanya.",
+      "toolType": "image-generation",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Kurator Seni AI. AI akan menghasilkan karya seni berdasarkan prompt utama, preset gaya, dan model AI yang dipilih, dengan mempertimbangkan elemen negatif untuk hasil yang lebih baik.",
+      "components": [
+        { "name": "mainPrompt", "label": "Prompt Utama", "type": "textarea", "placeholder": "e.g., 'The celestial wolf, cosmic dust, stars, nebula, vibrant colors'", "info": "Deskripsi utama dari karya seni Anda.", "validation": { "min_length": 20 } },
+        { "name": "stylePreset", "label": "Preset Gaya", "type": "text", "placeholder": "e.g., 'Cosmic', 'Oil Painting', 'Cyberpunk'", "info": "Gaya preset yang Anda pilih di NightCafe.", "validation": { "min_length": 3 } },
+        { "name": "model", "label": "Model AI", "type": "text", "placeholder": "e.g., 'SDXL 1.0', 'DALL-E 3'", "info": "Model dasar yang digunakan untuk generasi.", "validation": { "min_length": 3 } },
+        { "name": "negativePrompt", "label": "Prompt Negatif", "type": "text", "placeholder": "e.g., 'low resolution, dull colors'", "info": "Elemen yang ingin dihindari.", "optional": true, "validation": { "min_length": 5 } },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Gunakan gaya bahasa yang sangat personal dan rentan. Sertakan satu analogi tentang berkebun. Akhiri dengan nada yang penuh harapan.", "info": "Instruksi spesifik tentang gaya, nada, atau elemen naratif yang harus ada.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    },
+    "Custom Image Generator": {
+      "description": "Demonstrasi input interaktif: color picker, date picker, dan slider.",
+      "toolType": "image-generation",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Demonstrator Input. AI akan menampilkan bagaimana berbagai jenis input interaktif dapat digunakan untuk mengontrol parameter generasi gambar.",
+      "components": [
+        { "name": "mainSubject", "label": "Subjek Utama", "type": "text", "placeholder": "e.g., 'Pemandangan gunung'", "info": "Deskripsi subjek gambar.", "validation": { "min_length": 5 } },
+        { "name": "primaryColor", "label": "Warna Utama", "type": "color", "info": "Pilih warna dominan untuk gambar." },
+        { "name": "creationDate", "label": "Tanggal Kreasi", "type": "date", "info": "Tanggal gambar dibuat." },
+        { "name": "detailLevel", "label": "Tingkat Detail", "type": "slider", "min": 0, "max": 100, "step": 1, "info": "Sesuaikan tingkat detail gambar (0-100)." },
+        { "name": "contrast", "label": "Kontras", "type": "slider", "min": -50, "max": 50, "step": 5, "info": "Sesuaikan kontras gambar (-50 hingga 50)." },
+        { "name": "additionalNotes", "label": "Catatan Tambahan", "type": "textarea", "placeholder": "e.g., 'Gaya realistis, pencahayaan dramatis.'", "info": "Catatan atau instruksi tambahan.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    }
+  },
+  "Prompt AI Video (Text-to-Video)": {
+    "Sora (OpenAI)": {
+      "description": "Buat prompt yang sangat deskriptif dan sinematik untuk menghasilkan video berkualitas tinggi dengan Sora.",
+      "toolType": "video",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Sutradara AI. AI akan menginterpretasikan deskripsi adegan yang kaya dan instruksi kamera untuk menghasilkan video sinematik yang detail dan berkualitas tinggi, memanfaatkan kemampuan Sora dalam memahami narasi visual.",
+      "components": [
+        { "name": "sceneDescription", "label": "Deskripsi Adegan Detail", "type": "textarea", "placeholder": "e.g., 'A stylish woman walks through a Tokyo street filled with warm glowing neon and animated city signage. She wears a black leather jacket, a long red dress, and black boots. The street is damp and reflective, creating a mirror effect of the colorful lights.'", "info": "Jelaskan adegan, subjek, latar belakang, dan atmosfer secara naratif dan mendetail.", "validation": { "min_length": 50 } },
+        { "name": "cameraWork", "label": "Gerakan & Sudut Kamera", "type": "text", "placeholder": "e.g., 'Extreme close-up, tracking shot, drone footage flying over a landscape'", "info": "Deskripsikan bagaimana kamera harus bergerak atau membingkai adegan.", "validation": { "min_length": 10 } },
+        { "name": "visualStyle", "label": "Gaya Visual", "type": "text", "placeholder": "e.g., 'cinematic, 35mm film, photorealistic, anime, black and white'", "info": "Gaya keseluruhan dari video.", "validation": { "min_length": 5 } },
+        { "name": "durationHint", "label": "Petunjuk Durasi (Opsional)", "type": "text", "placeholder": "e.g., 'a short clip', 'a looping video'", "info": "Berikan petunjuk tentang panjang atau sifat video.", "optional": true, "validation": { "min_length": 5 } },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Gunakan gaya bahasa yang sangat personal dan rentan. Sertakan satu analogi tentang berkebun. Akhiri dengan nada yang penuh harapan.", "info": "Instruksi spesifik tentang gaya, nada, atau elemen naratif yang harus ada.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    },
+    "Pika": {
+      "description": "Buat prompt untuk Pika, dengan opsi untuk menganimasikan gambar atau menghasilkan video dari teks.",
+      "toolType": "video",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Animator AI. AI akan menganimasikan gambar atau menghasilkan video dari teks, dengan mempertimbangkan prompt utama, elemen negatif, dan kontrol gerakan untuk menciptakan output visual yang dinamis.",
+      "components": [
+        { "name": "mainPrompt", "label": "Prompt Utama", "type": "textarea", "placeholder": "e.g., 'A robot surfing on a giant wave, cinematic, epic'", "info": "Deskripsi utama dari video yang ingin Anda buat.", "validation": { "min_length": 20 } },
+        { "name": "negativePrompt", "label": "Prompt Negatif", "type": "text", "placeholder": "e.g., 'blurry, low quality, watermark'", "info": "Elemen yang ingin Anda hindari.", "optional": true, "validation": { "min_length": 5 } },
+        { "name": "motionControl", "label": "Kontrol Gerakan", "type": "text", "placeholder": "e.g., 'camera zooming in', 'panning left', 'high motion'", "info": "Deskripsikan intensitas atau arah gerakan yang diinginkan.", "optional": true, "validation": { "min_length": 5 } },
+        { "name": "imageInput", "label": "Input Gambar (Opsional)", "type": "text", "placeholder": "e.g., 'Gunakan gambar seekor kucing untuk dianimasikan.'", "info": "Sebutkan jika Anda ingin menganimasikan gambar yang sudah ada.", "optional": true, "validation": { "min_length": 10 } },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Gunakan gaya bahasa yang sangat personal dan rentan. Sertakan satu analogi tentang berkebun. Akhiri dengan nada yang penuh harapan.", "info": "Instruksi spesifik tentang gaya, nada, atau elemen naratif yang harus ada.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    },
+    "Runway": {
+      "description": "Buat prompt untuk Runway, platform serbaguna untuk generasi video dari teks, gambar, atau video lain.",
+      "toolType": "video",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Produser Video AI. AI akan menghasilkan video berdasarkan prompt, sumber input, dan kontrol kamera, memanfaatkan keserbagunaan Runway untuk berbagai kebutuhan generasi video.",
+      "components": [
+        { "name": "prompt", "label": "Prompt Utama", "type": "textarea", "placeholder": "e.g., 'A drone shot of a futuristic city at sunset.'", "info": "Deskripsi adegan yang ingin Anda hasilkan.", "validation": { "min_length": 20 } },
+        { "name": "inputSource", "label": "Sumber Input (Opsional)", "type": "text", "placeholder": "e.g., 'Gunakan gambar X sebagai referensi gaya', 'Ubah video Y menjadi gaya Z'", "info": "Sebutkan jika Anda menggunakan gambar atau video sebagai input (Image to Video, Video to Video).", "optional": true, "validation": { "min_length": 10 } },
+        { "name": "cameraMotion", "label": "Gerakan Kamera", "type": "text", "placeholder": "e.g., 'pan, tilt, zoom, roll'", "info": "Kontrol pergerakan kamera virtual.", "optional": true, "validation": { "min_length": 5 } },
+        { "name": "motionBrush", "label": "Motion Brush (Konsep)", "type": "text", "placeholder": "e.g., 'Isolasi gerakan hanya pada awan di langit.'", "info": "Deskripsikan area spesifik pada gambar yang ingin Anda animasikan.", "optional": true, "validation": { "min_length": 10 } },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Gunakan gaya bahasa yang sangat personal dan rentan. Sertakan satu analogi tentang berkebun. Akhiri dengan nada yang penuh harapan.", "info": "Instruksi spesifik tentang gaya, nada, atau elemen naratif yang harus ada.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    },
+    "Kaiber": {
+      "description": "Buat prompt untuk Kaiber, yang dikenal dengan gaya visual artistik dan transformasi video.",
+      "toolType": "video",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Transformator Visual. AI akan menghasilkan video dengan gaya visual artistik yang unik, mampu mentransformasi video input atau menciptakan adegan baru berdasarkan deskripsi subjek dan gaya yang diberikan.",
+      "components": [
+        { "name": "subject", "label": "Subjek Video", "type": "text", "placeholder": "e.g., 'A dancing silhouette'", "info": "Fokus utama dari video Anda.", "validation": { "min_length": 5 } },
+        { "name": "style", "label": "Gaya Visual", "type": "textarea", "placeholder": "e.g., 'in the style of a psychedelic painting, vibrant, abstract'", "info": "Deskripsi gaya artistik yang Anda inginkan.", "validation": { "min_length": 10 } },
+        { "name": "transformation", "label": "Transformasi (untuk video-ke-video)", "type": "text", "placeholder": "e.g., 'Transform my video into an anime scene'", "info": "Jelaskan bagaimana video input harus diubah.", "optional": true, "validation": { "min_length": 10 } },
+        { "name": "aspectRatio", "label": "Aspect Ratio", "type": "select", "options": ["9:16 (Portrait)", "16:9 (Landscape)", "1:1 (Square)"], "info": "Pilih orientasi video Anda." },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Gunakan gaya bahasa yang sangat personal dan rentan. Sertakan satu analogi tentang berkebun. Akhiri dengan nada yang penuh harapan.", "info": "Instruksi spesifik tentang gaya, nada, atau elemen naratif yang harus ada.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    },
+    "Google VEO": {
+      "description": "Buat prompt yang sangat deskriptif dan sinematik untuk menghasilkan video berkualitas tinggi dengan Google VEO.",
+      "toolType": "video",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Sinematografer AI. AI akan menghasilkan video berkualitas tinggi berdasarkan prompt deskriptif dan parameter sinematik, memanfaatkan pemahaman Google VEO tentang komposisi visual dan gerakan kamera.",
+      "components": [
+        { "name": "prompt", "label": "Prompt Deskriptif", "type": "textarea", "placeholder": "e.g., 'Several majestic elephants stride toward a watering hole at sunset, their wrinkled skin catching the golden light. The African savanna stretches out behind them.'", "info": "Tulis prompt yang kaya detail, seolah-olah mendeskripsikan adegan film.", "validation": { "min_length": 50 } },
+        { "name": "aspectRatio", "label": "Aspect Ratio", "type": "select", "options": ["16:9", "9:16", "1:1"], "info": "Nilai yang didukung adalah "16:9" (layar lebar, bagus untuk lanskap), "9:16" (potret/vertikal, bagus untuk objek tinggi), dan "1:1" (persegi). Default adalah "16:9"." },
+        { "name": "personGeneration", "label": "Generasi Orang", "type": "select", "options": ["allow", "dont_allow", "allow_adult"], "info": "Kontrol penyertaan orang dengan "dont_allow" atau "allow_adult"." },
+        { "name": "negativePrompt", "label": "Negative Prompt", "type": "textarea", "placeholder": "e.g., 'wall, frame'", "info": "Tentukan elemen yang akan dikecualikan dari video. Jelaskan apa yang tidak Anda inginkan (misalnya, "dinding, bingkai") daripada menggunakan bahasa instruktif seperti "tidak" atau "jangan".", "optional": true, "validation": { "min_length": 5 } },
+        { "name": "generateAudio", "label": "Generate Audio", "type": "select", "options": ["true", "false"], "info": "Kontrol apakah audio dihasilkan untuk video." },
+        { "name": "image", "label": "Image (First Frame)", "type": "text", "placeholder": "e.g., 'URL_gambar'", "info": "Gunakan gambar sebagai bingkai pertama untuk generasi gambar-ke-video.", "optional": true, "validation": { "min_length": 10 } },
+        { "name": "durationSeconds", "label": "Durasi (detik)", "type": "number", "placeholder": "e.g., 8", "info": "Klip video yang dihasilkan biasanya berdurasi 8 detik, tetapi dapat diperpanjang hingga 60 detik.", "validation": { "min_value": 1, "max_value": 60 } },
+        { "name": "resolution", "label": "Resolusi", "type": "text", "placeholder": "e.g., '1280x720px'", "info": "Veo 2 menghasilkan 1280x720px (720p), dengan potensi resolusi 4K.", "optional": true, "validation": { "min_length": 5 } },
+        { "name": "model", "label": "Model", "type": "text", "placeholder": "e.g., 'veo-2.0-generate-001'", "info": "Tentukan versi model, misalnya, "veo-2.0-generate-001" atau "veo-3.0-generate-preview".", "optional": true, "validation": { "min_length": 5 } },
+        { "name": "cinematicTerms", "label": "Istilah Sinematik", "type": "text", "placeholder": "e.g., 'time-lapse of a blooming flower', 'aerial shot of a coastline'", "info": "Gunakan istilah teknis perfilman untuk mengarahkan hasil.", "optional": true, "validation": { "min_length": 5 } },
+        { "name": "styleModifier", "label": "Pengubah Gaya", "type": "text", "placeholder": "e.g., 'in a surreal, dreamlike style', 'as a black and white film noir'", "info": "Tambahkan frasa untuk menentukan gaya visual secara keseluruhan.", "optional": true, "validation": { "min_length": 5 } },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Veo 3 adalah versi terbaru, menawarkan realisme yang ditingkatkan, simulasi fisika, dan kemampuan audio asli. Klip biasanya berdurasi 8 detik, tetapi dapat diperpanjang hingga 60 detik. Filter keamanan diterapkan pada konten yang dihasilkan. Veo memiliki pemahaman yang kuat tentang bahasa sinematik, memungkinkan kontrol yang tepat atas output video. Titik Akses: Veo dapat diakses melalui Gemini API, Vertex AI, dan aplikasi Flow. Paket Google One AI Premium mungkin termasuk akses. Harga: Veo adalah fitur berbayar; periksa halaman harga resmi Google untuk detailnya. Hindari Pencampuran Gaya: Jangan mencampur gaya yang bertentangan (misalnya, kartun dan fotorealistik) dalam satu prompt. Subtitle: Untuk menghindari subtitle yang tidak diinginkan, tambahkan "(tanpa subtitle)" ke prompt atau gunakan metode prompt dialog tertentu. Watermark: Video yang dihasilkan mungkin menyertakan watermark.", "info": "Instruksi spesifik tentang gaya, nada, atau elemen naratif yang harus ada.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    }
+  },
+  "Platform Desain Berbasis AI": {
+    "Canva (Magic Design)": {
+      "description": "Gunakan deskripsi teks untuk menghasilkan template desain yang dapat disesuaikan secara instan di Canva.",
+      "toolType": "image-editing",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Desainer Grafis AI. AI akan menghasilkan template desain yang dapat disesuaikan secara instan di Canva berdasarkan deskripsi teks, dengan mempertimbangkan jenis desain, ide, gaya, dan konten yang diinginkan.",
+      "components": [
+        { "name": "designType", "label": "Jenis Desain", "type": "select", "options": ["Presentasi", "Postingan Instagram", "Poster", "Logo", "Selebaran (Flyer)", "Lainnya..."], "info": "Pilih jenis dokumen atau format desain yang Anda butuhkan." },
+        { "name": "description", "label": "Deskripsi Desain Anda", "type": "textarea", "placeholder": "e.g., 'Sebuah postingan Instagram untuk mempromosikan workshop tentang berkebun di perkotaan. Gunakan gaya yang modern dan organik dengan warna hijau dan krem.'", "info": "Jelaskan secara singkat (5+ kata) tentang ide, gaya, dan konten desain Anda.", "validation": { "min_length": 20 } },
+        { "name": "contentToInclude", "label": "Teks & Konten Utama", "type": "textarea", "placeholder": "e.g., 'Judul: Urban Gardening 101. Tanggal: 25 Juli. Pembicara: Jane Doe.'", "info": "Sebutkan teks, judul, atau informasi penting yang harus ada di dalam desain.", "validation": { "min_length": 10 } },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Berikan batasan atau instruksi spesifik untuk memandu AI.", "info": "Sebutkan batasan, gaya penulisan spesifik, atau informasi latar yang penting untuk dipahami AI.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    }
+  },
+  "Utilitas & Penyuntingan AI": {
+    "Clipdrop": {
+      "description": "Gunakan prompt untuk berbagai alat bantu AI dari Clipdrop, seperti mengganti latar belakang atau memperbesar gambar.",
+      "toolType": "image-editing",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Editor Foto AI. AI akan menginterpretasikan prompt dan input gambar untuk menerapkan fungsi alat Clipdrop yang dipilih, seperti mengganti latar belakang, memperbesar gambar, atau menghasilkan variasi visual, dengan fokus pada hasil yang akurat dan berkualitas tinggi.",
+      "components": [
+        { "name": "tool", "label": "Alat Clipdrop yang Digunakan", "type": "select", "options": ["Stable Diffusion XL", "Uncrop", "Reimagine XL", "Stable Doodle", "Cleanup", "Remove Background", "Replace Background", "Image Upscaler", "Lainnya..."], "info": "Pilih alat spesifik yang ingin Anda gunakan." },
+        { "name": "prompt", "label": "Prompt / Instruksi", "type": "textarea", "placeholder": "e.g., 'A photo of a corgi wearing a superhero cape' atau 'replace the background with a beautiful beach at sunset'", "info": "Deskripsikan apa yang ingin Anda hasilkan atau ubah.", "validation": { "min_length": 10 } },
+        { "name": "imageInput", "label": "Input Gambar (jika ada)", "type": "text", "placeholder": "e.g., 'Gunakan gambar anjing saya.'", "info": "Sebutkan gambar yang akan diedit jika menggunakan alat seperti Remove Background atau Uncrop.", "optional": true, "validation": { "min_length": 10 } },
+        { "name": "additionalContext", "label": "Konteks Tambahan & Instruksi Khusus", "type": "textarea", "placeholder": "Contoh: Berikan batasan atau instruksi spesifik untuk memandu AI.", "info": "Sebutkan batasan, gaya penulisan spesifik, atau informasi latar yang penting untuk dipahami AI.", "optional": true, "validation": { "min_length": 10 } }
+      ]
+    }
+  }
+}

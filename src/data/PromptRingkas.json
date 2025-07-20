@@ -1,0 +1,17 @@
+{
+  "Formula Persuasi & Pemasaran": {
+    "AIDA": {
+      "description": "Buat teks persuasif yang menarik perhatian, membangun minat, menciptakan keinginan, dan mendorong tindakan.",
+      "toolType": "text",
+      "ai_logic_description": "Persona AI: Anda adalah seorang Ahli Persuasi. AI akan menghasilkan teks persuasif yang mengikuti formula AIDA (Attention, Interest, Desire, Action), dengan fokus pada menarik perhatian, membangun minat, menciptakan keinginan, dan mendorong tindakan audiens target.",
+      "components": [
+        { "name": "productOrService", "label": "Produk/Layanan", "type": "text", "placeholder": "e.g., 'Aplikasi manajemen waktu'" },
+        { "name": "targetAudience", "label": "Target Audiens", "type": "text", "placeholder": "e.g., 'Profesional sibuk, pelajar'" },
+        { "name": "attentionHook", "label": "Poin untuk Menarik Perhatian (Attention)", "type": "textarea", "placeholder": "e.g., 'Berhenti membuang-buang waktu. Dapatkan kembali kendali hari Anda.'" },
+        { "name": "interestPoints", "label": "Poin untuk Membangun Minat (Interest)", "type": "textarea", "placeholder": "e.g., 'Fitur pelacakan otomatis, integrasi kalender, laporan produktivitas mingguan.'" },
+        { "name": "desireDrivers", "label": "Poin untuk Menciptakan Keinginan (Desire)", "type": "textarea", "placeholder": "e.g., 'Bayangkan menyelesaikan semua tugas Anda sebelum jam 3 sore. Rasakan kebebasan dan ketenangan pikiran.'" },
+        { "name": "callToAction", "label": "Ajakan Bertindak (Action)", "type": "text", "placeholder": "e.g., 'Unduh sekarang dan coba gratis selama 7 hari!'" }
+      ]
+    }
+  }
+}
