@@ -772,6 +772,117 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
             )}
           </div>
         )}
+        {compType === "slider" && (
+          <div className="d-flex align-items-center">
+            <InputGroup className="flex-grow-1">
+              <OverlayTrigger
+                placement="right"
+                overlay={
+                  <Tooltip id={`tooltip-error-${compName}`}>
+                    {validationErrors[compName]}
+                  </Tooltip>
+                }
+                show={touchedFields[compName] && !!validationErrors[compName]}
+              >
+                <Form.Range
+                  name={compName}
+                  min={inputDetails.min || 0}
+                  max={inputDetails.max || 100}
+                  step={inputDetails.step || 1}
+                  value={formData[compName] || inputDetails.min || 0}
+                  onChange={(e) =>
+                    handleInputChangeWithValidation(
+                      compName,
+                      e.target.value,
+                      inputDetails,
+                    )
+                  }
+                  onMouseEnter={() => setHoveredField(compName)}
+                  onMouseLeave={() => setHoveredField(null)}
+                  isInvalid={
+                    touchedFields[compName] && !!validationErrors[compName]
+                  }
+                  aria-invalid={
+                    touchedFields[compName] && !!validationErrors[compName]
+                      ? "true"
+                      : "false"
+                  }
+                  aria-describedby={
+                    touchedFields[compName] && !!validationErrors[compName]
+                      ? `validation-feedback-${compName}`
+                      : undefined
+                  }
+                />
+              </OverlayTrigger>
+              <Form.Control.Feedback
+                type="invalid"
+                id={`validation-feedback-${compName}`}
+              >
+                {validationErrors[compName]}
+              </Form.Control.Feedback>
+            </InputGroup>
+            {showDevMode && (
+              <Button
+                variant="outline-secondary"
+                onClick={() =>
+                  handleAiAssist(
+                    compName,
+                    formData[compName] || "",
+                    inputDetails,
+                  )
+                }
+                disabled={isAiAssisting[compName]}
+                title="AI Assist"
+                className="ms-2"
+              >
+                {isAiAssisting[compName] ? (
+                  <Spinner as="span" animation="border" size="sm" />
+                ) : (
+                  <FaMagic />
+                )}
+              </Button>
+            )}
+          </div>
+        )}
+        {compType === "boolean" && (
+          <div className="d-flex align-items-center">
+            <Form.Check
+              type="checkbox"
+              id={compName}
+              name={compName}
+              label={compLabel}
+              checked={!!formData[compName]}
+              onChange={(e) =>
+                handleInputChangeWithValidation(
+                  compName,
+                  e.target.checked,
+                  inputDetails,
+                )
+              }
+              onMouseEnter={() => setHoveredField(compName)}
+              onMouseLeave={() => setHoveredField(null)}
+              isInvalid={
+                touchedFields[compName] && !!validationErrors[compName]
+              }
+              aria-invalid={
+                touchedFields[compName] && !!validationErrors[compName]
+                  ? "true"
+                  : "false"
+              }
+              aria-describedby={
+                touchedFields[compName] && !!validationErrors[compName]
+                  ? `validation-feedback-${compName}`
+                  : undefined
+              }
+            />
+            <Form.Control.Feedback
+              type="invalid"
+              id={`validation-feedback-${compName}`}
+            >
+              {validationErrors[compName]}
+            </Form.Control.Feedback>
+          </div>
+        )}
         {compType === "select" && (
           <div className="w-100">
             <OverlayTrigger
