@@ -56,15 +56,7 @@ const Header: React.FC<HeaderProps> = ({
         <Nav className="ms-auto d-flex align-items-center">
           {/* <Nav.Link href="#about" className="text-white">Tentang</Nav.Link> */}
           {/* <Nav.Link href="#guide" className="text-white">Panduan</Nav.Link> */}
-          <Button
-            variant="outline-light"
-            onClick={() => setShowNavigation(!showNavigation)}
-            className="d-lg-none ms-3"
-            aria-controls="navigation-pane"
-            aria-expanded={showNavigation}
-          >
-            ☰
-          </Button>
+
           <Button
             variant="outline-info"
             onClick={onShowHelp}
