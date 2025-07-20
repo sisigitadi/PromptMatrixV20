@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => {
       },
       base: '/PromptMatrixV20/',
       optimizeDeps: {
-        include: ['react', 'react-dom'],
+        exclude: ['react', 'react-dom'],
       },
       plugins: [
         visualizer({
