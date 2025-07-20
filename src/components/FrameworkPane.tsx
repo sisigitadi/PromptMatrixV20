@@ -76,7 +76,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
   const [isAiAssisting, setIsAiAssisting] = useState<{
     [key: string]: boolean;
   }>({});
-  const [showTemporaryTooltip, setShowTemporaryTooltip] = useState<{
+  useState<{
     [key: string]: boolean;
   }>({});
 
@@ -106,9 +106,6 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
     const compPlaceholder = inputDetails.placeholder;
     const compOptions = inputDetails.options;
     const compInfo = inputDetails.info; // 'info' is from old FrameworkComponent
-    const compMin = inputDetails.min;
-    const compMax = inputDetails.max;
-    const compStep = inputDetails.step;
     const isOptional = inputDetails.optional; // New property from SOP
 
     const handleAiAssist = async (
