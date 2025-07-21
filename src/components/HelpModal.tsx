@@ -69,7 +69,7 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
                 className="help-doc-button"
                 onClick={() =>
                   loadMarkdown(
-                    "/docs/PanduanPenggunaanInteraktif.md",
+                    "/PromptMatrixV20/public/docs/PanduanPenggunaanInteraktif.md",
                     "Panduan Penggunaan Interaktif",
                   )
                 }
@@ -82,7 +82,7 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
                 variant="primary"
                 size="lg"
                 className="help-doc-button"
-                onClick={() => loadMarkdown("/docs/FAQ.md", "FAQ")}
+                onClick={() => loadMarkdown("/PromptMatrixV20/docs/FAQ.md", "FAQ")}
                 aria-label="Baca FAQ"
               >
                 <i className="bi bi-question-circle me-2"></i>
