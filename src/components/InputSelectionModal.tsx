@@ -99,13 +99,13 @@ const InputSelectionModal: React.FC<InputSelectionModalProps> = ({
             comp.name.toLowerCase().includes(searchTerm) ||
             comp.label.toLowerCase().includes(searchTerm),
         ) ||
-        fw.details.komponen_prompt?.["VARIABEL INPUT"] &&
+        (fw.details.komponen_prompt?.["VARIABEL INPUT"] &&
           Object.values(fw.details.komponen_prompt["VARIABEL INPUT"]).some(
             (input) =>
               input.name.toLowerCase().includes(searchTerm) ||
               input.label.toLowerCase().includes(searchTerm),
-          ) ||
-        fw.details.dynamicSubcomponents &&
+          )) ||
+        (fw.details.dynamicSubcomponents &&
           Object.values(fw.details.dynamicSubcomponents.options).some(
             (subcomps) =>
               subcomps.some(
@@ -113,7 +113,7 @@ const InputSelectionModal: React.FC<InputSelectionModalProps> = ({
                   comp.name.toLowerCase().includes(searchTerm) ||
                   comp.label.toLowerCase().includes(searchTerm),
               ),
-          ),
+          )),
     );
   }, [searchQuery, flatFrameworks]);
 

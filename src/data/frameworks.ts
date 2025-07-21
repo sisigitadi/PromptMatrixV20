@@ -949,7 +949,8 @@ export const PROMPT_FRAMEWORKS: PromptFrameworksType = {
             triggerValue: "Lainnya...",
             dependentField: "customAspectRatio",
             validationType: "required",
-            errorMessage: "'Rasio Aspek Kustom' wajib diisi jika 'Rasio Aspek' adalah 'Lainnya...'.",
+            errorMessage:
+              "'Rasio Aspek Kustom' wajib diisi jika 'Rasio Aspek' adalah 'Lainnya...'.",
           },
         ],
       },

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, Collapse, Spinner, Row, Col, Form } from "react-bootstrap";
+import { Card, Button, Collapse, Spinner, Row, Col } from "react-bootstrap";
 import { PromptFrameworksType, CATEGORY_ORDER } from "../data/frameworks";
 import SearchBar from "./SearchBar";
 
