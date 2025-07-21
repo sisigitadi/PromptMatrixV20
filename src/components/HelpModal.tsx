@@ -94,7 +94,7 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
                 className="help-doc-button"
                 onClick={() =>
                   loadMarkdown(
-                    "/docs/DaftarKerangkaKerja.md",
+                    "/PromptMatrixV20/docs/DaftarKerangkaKerja.md",
                     "Daftar Kerangka Kerja",
                   )
                 }
