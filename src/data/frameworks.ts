@@ -61,7 +61,7 @@ export type Framework = {
     | "planning"
     | "video";
   components?: FrameworkComponent[]; // Make optional
-  dynamicSubcomponents?: DynamicSubcomponents; // Make optional
+  dynamicSubcomponents?: DynamicSubcomponents;
   ai_logic_description?: string;
 
   // New fields from SOP
@@ -941,6 +941,15 @@ export const PROMPT_FRAMEWORKS: PromptFrameworksType = {
             info: "Instruksi spesifik tentang gaya atau konten dari ringkasan.",
             optional: true,
             validation: { min_length: 10 },
+          },
+        ],
+        crossValidationRules: [
+          {
+            triggerField: "aspectRatio",
+            triggerValue: "Lainnya...",
+            dependentField: "customAspectRatio",
+            validationType: "required",
+            errorMessage: "'Rasio Aspek Kustom' wajib diisi jika 'Rasio Aspek' adalah 'Lainnya...'.",
           },
         ],
       },

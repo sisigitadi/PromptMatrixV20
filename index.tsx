@@ -133,10 +133,12 @@ const App = () => {
     });
   };
 
-  const handleCustomInputChangeWithValidation = (name: string, value: string) => {
+  const handleCustomInputChangeWithValidation = (name: string, value: string, inputDetails: FrameworkComponent) => {
     setTouchedFields(prev => ({ ...prev, [name]: true })); // Mark as touched
     setCustomInputs(prev => {
       const newCustomInputs = { ...prev, [name]: value };
+      const error = validateInput(name, value, inputDetails);
+      setValidationErrors(prevErrors => ({ ...prevErrors, [name]: error }));
       return newCustomInputs;
     });
   };

@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, Button, Collapse, Spinner, Row, Col } from "react-bootstrap";
-import { PromptFrameworksType } from "../data/frameworks";
+import { Card, Button, Collapse, Spinner, Row, Col, Form } from "react-bootstrap";
+import { PromptFrameworksType, CATEGORY_ORDER } from "../data/frameworks";
 import SearchBar from "./SearchBar";
 
 interface NavigationPaneProps {
@@ -48,73 +48,20 @@ const NavigationPane: React.FC<NavigationPaneProps> = ({
           1. Pilih Kategori / Cari Kerangka Kerja:
         </h2>
         <Row className="mb-3 g-2">
-          <Col xs={12} md={6}>
-            <Button
-              key={"Gambar & Desain"}
-              variant={
-                selectedCategory === "Gambar & Desain" ? "primary" : "secondary"
-              }
-              onClick={() => handleCategorySelect("Gambar & Desain")}
-              className={`category-toggle-button w-100 ${selectedCategory === "Gambar & Desain" ? "active" : ""}`}
-              aria-pressed={selectedCategory === "Gambar & Desain"}
-            >
-              🎨 Gambar & Desain
-            </Button>
-          </Col>
-          <Col xs={12} md={6}>
-            <Button
-              key={"Audio & Musik"}
-              variant={
-                selectedCategory === "Audio & Musik" ? "primary" : "secondary"
-              }
-              onClick={() => handleCategorySelect("Audio & Musik")}
-              className={`category-toggle-button w-100 ${selectedCategory === "Audio & Musik" ? "active" : ""}`}
-              aria-pressed={selectedCategory === "Audio & Musik"}
-            >
-              🎵 Audio & Musik
-            </Button>
-          </Col>
-          <Col xs={12} md={6}>
-            <Button
-              key={"Prompt Ringkas"}
-              variant={
-                selectedCategory === "Prompt Ringkas" ? "primary" : "secondary"
-              }
-              onClick={() => handleCategorySelect("Prompt Ringkas")}
-              className={`category-toggle-button w-100 ${selectedCategory === "Prompt Ringkas" ? "active" : ""}`}
-              aria-pressed={selectedCategory === "Prompt Ringkas"}
-            >
-              ✨ Prompt Ringkas
-            </Button>
-          </Col>
-          <Col xs={12} md={6}>
-            <Button
-              key={"Prompt Proyek"}
-              variant={
-                selectedCategory === "Prompt Proyek" ? "primary" : "secondary"
-              }
-              onClick={() => handleCategorySelect("Prompt Proyek")}
-              className={`category-toggle-button w-100 ${selectedCategory === "Prompt Proyek" ? "active" : ""}`}
-              aria-pressed={selectedCategory === "Prompt Proyek"}
-            >
-              🚀 Prompt Proyek
-            </Button>
-          </Col>
-          <Col xs={12} md={6} className="mx-auto">
-            {" "}
-            {/* Center on larger screens */}
-            <Button
-              key={"Teks & Konten"}
-              variant={
-                selectedCategory === "Teks & Konten" ? "primary" : "secondary"
-              }
-              onClick={() => handleCategorySelect("Teks & Konten")}
-              className={`category-toggle-button w-100 ${selectedCategory === "Teks & Konten" ? "active" : ""}`}
-              aria-pressed={selectedCategory === "Teks & Konten"}
-            >
-              ✍️ Teks & Konten
-            </Button>
-          </Col>
+          {CATEGORY_ORDER.sort().map((categoryName) => (
+            <Col xs={12} md={6} key={categoryName}>
+              <Button
+                variant={
+                  selectedCategory === categoryName ? "primary" : "secondary"
+                }
+                onClick={() => handleCategorySelect(categoryName)}
+                className={`category-toggle-button w-100 ${selectedCategory === categoryName ? "active" : ""}`}
+                aria-pressed={selectedCategory === categoryName}
+              >
+                {categoryName}
+              </Button>
+            </Col>
+          ))}
         </Row>
         <SearchBar
           searchQuery={searchQuery}

@@ -137,9 +137,7 @@ export function useFrameworkNavigation(dispatch: (action: any) => void) {
           ));
 
       const toolTypeMatch =
-        !toolTypeFilter ||
-        debouncedSearchQuery ||
-        framework.toolType === toolTypeFilter;
+        !toolTypeFilter || framework.toolType === toolTypeFilter;
       const categoryMatch =
         !selectedCategory || framework.category === selectedCategory;
 
