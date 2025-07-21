@@ -93,7 +93,27 @@ const InputSelectionModal: React.FC<InputSelectionModalProps> = ({
         fw.name.toLowerCase().includes(searchTerm) ||
         fw.description.toLowerCase().includes(searchTerm) ||
         fw.category.toLowerCase().includes(searchTerm) ||
-        fw.subcategory.toLowerCase().includes(searchTerm),
+        fw.subcategory.toLowerCase().includes(searchTerm) ||
+        fw.details.components?.some(
+          (comp) =>
+            comp.name.toLowerCase().includes(searchTerm) ||
+            comp.label.toLowerCase().includes(searchTerm),
+        ) ||
+        fw.details.komponen_prompt?.["VARIABEL INPUT"] &&
+          Object.values(fw.details.komponen_prompt["VARIABEL INPUT"]).some(
+            (input) =>
+              input.name.toLowerCase().includes(searchTerm) ||
+              input.label.toLowerCase().includes(searchTerm),
+          ) ||
+        fw.details.dynamicSubcomponents &&
+          Object.values(fw.details.dynamicSubcomponents.options).some(
+            (subcomps) =>
+              subcomps.some(
+                (comp) =>
+                  comp.name.toLowerCase().includes(searchTerm) ||
+                  comp.label.toLowerCase().includes(searchTerm),
+              ),
+          ),
     );
   }, [searchQuery, flatFrameworks]);
 
@@ -217,7 +237,7 @@ const InputSelectionModal: React.FC<InputSelectionModalProps> = ({
               <h5>Pilih Input untuk {selectedFrameworkName}:</h5>
               <ListGroup>
                 {currentFrameworkDetails.components
-                  .sort((a, b) => a.label.localeCompare(b.label))
+                  ?.sort((a, b) => a.label.localeCompare(b.label))
                   .map((comp) => (
                     <ListGroup.Item
                       key={comp.name}
@@ -233,6 +253,26 @@ const InputSelectionModal: React.FC<InputSelectionModalProps> = ({
                       {comp.label} ({comp.type})
                     </ListGroup.Item>
                   ))}
+                {currentFrameworkDetails.komponen_prompt?.["VARIABEL INPUT"] &&
+                  Object.entries(
+                    currentFrameworkDetails.komponen_prompt["VARIABEL INPUT"],
+                  )
+                    .sort(([, a], [, b]) => a.label.localeCompare(b.label))
+                    .map(([name, details]) => (
+                      <ListGroup.Item
+                        key={name}
+                        action
+                        active={selectedInputName === name}
+                        onClick={() => handleInputSelect(name)}
+                        className="list-group-item-themed"
+                        role="button"
+                        aria-current={
+                          selectedInputName === name ? "true" : undefined
+                        }
+                      >
+                        {details.label || name} ({details.type})
+                      </ListGroup.Item>
+                    ))}
                 {currentFrameworkDetails.dynamicSubcomponents &&
                   Object.values(
                     currentFrameworkDetails.dynamicSubcomponents.options,

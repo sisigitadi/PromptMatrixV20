@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button, ListGroup, Form, InputGroup } from "react-bootstrap";
+import { Modal, Button, ListGroup, Form, InputGroup, Collapse } from "react-bootstrap";
 
 interface SavedPromptsDisplayProps {
   show: boolean;
@@ -25,6 +25,7 @@ const SavedPromptsDisplay: React.FC<SavedPromptsDisplayProps> = ({
   const [sortBy, setSortBy] = useState("dateDesc");
   const [promptToRename, setPromptToRename] = useState<any>(null);
   const [newPromptName, setNewPromptName] = useState("");
+  const [expandedPromptId, setExpandedPromptId] = useState<string | null>(null);
 
   const handleRenameClick = (prompt: any) => {
     setPromptToRename(prompt);
@@ -153,17 +154,27 @@ const SavedPromptsDisplay: React.FC<SavedPromptsDisplayProps> = ({
                       <strong>{prompt.frameworkName}</strong>
                       <br />
                       <small>
-                        Disimpan: {new Date(prompt.timestamp).toLocaleString()}
+                        Disimpan: {new Date(prompt.versions[prompt.versions.length - 1].timestamp).toLocaleString()}
                       </small>
                     </div>
                     <div className="prompt-actions">
                       <Button
+                        variant="info"
+                        size="sm"
+                        className="me-2"
+                        onClick={() => handleToggleExpand(prompt.id)}
+                        title="Lihat Riwayat Versi"
+                        aria-label="Lihat Riwayat Versi"
+                      >
+                        {expandedPromptId === prompt.id ? "⬆️ Sembunyikan" : "⬇️ Riwayat"}
+                      </Button>
+                      <Button
                         variant="primary"
                         size="sm"
                         className="me-2"
-                        onClick={() => onLoadPrompt(prompt)}
-                        title="Muat Prompt"
-                        aria-label="Muat Prompt"
+                        onClick={() => onLoadPrompt(prompt.versions[prompt.versions.length - 1])}
+                        title="Muat Versi Terbaru"
+                        aria-label="Muat Versi Terbaru"
                       >
                         📥
                       </Button>
@@ -189,6 +200,29 @@ const SavedPromptsDisplay: React.FC<SavedPromptsDisplayProps> = ({
                     </div>
                   </div>
                 )}
+                <Collapse in={expandedPromptId === prompt.id}>
+                  <div className="mt-3 pt-2 border-top">
+                    <h6>Riwayat Versi:</h6>
+                    <ListGroup variant="flush">
+                      {prompt.versions.map((version: any, index: number) => (
+                        <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center small list-group-item-themed">
+                          <span>
+                            Versi {index + 1} - {new Date(version.timestamp).toLocaleString()}
+                          </span>
+                          <Button
+                            variant="outline-primary"
+                            size="sm"
+                            onClick={() => onLoadPrompt(version)}
+                            title="Muat Versi Ini"
+                            aria-label={`Muat Versi ${index + 1}`}
+                          >
+                            Muat
+                          </Button>
+                        </ListGroup.Item>
+                      ))}
+                    </ListGroup>
+                  </div>
+                </Collapse>
               </ListGroup.Item>
             ))}
           </ListGroup>

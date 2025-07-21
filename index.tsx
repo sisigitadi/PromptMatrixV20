@@ -202,9 +202,29 @@ const App = () => {
     localStorage.setItem('isApiKeyEnabled', String(isApiKeyEnabled));
   }, [isApiKeyEnabled]);
 
-  const [savedPrompts, setSavedPrompts] = useState<any[]>(() => {
+  const [savedPrompts, setSavedPrompts] = useState<SavedPrompt[]>(() => {
     const localData = localStorage.getItem('savedPrompts');
-    return localData ? JSON.parse(localData) : [];
+    if (localData) {
+      const parsedData = JSON.parse(localData);
+      // Simple migration: if old data is just an array of promptData, convert it to the new format
+      if (parsedData.length > 0 && !('versions' in parsedData[0])) {
+        return parsedData.map((oldPrompt: any) => ({
+          id: oldPrompt.id || Date.now().toString() + Math.random().toString(36).substring(2, 9),
+          frameworkName: oldPrompt.frameworkName,
+          category: oldPrompt.category,
+          subcategory: oldPrompt.subcategory,
+          versions: [{
+            timestamp: oldPrompt.timestamp || Date.now(),
+            formData: oldPrompt.formData,
+            customInputs: oldPrompt.customInputs,
+            naturalLanguageOutput: oldPrompt.naturalLanguageOutput,
+            jsonOutput: oldPrompt.jsonOutput,
+          }],
+        }));
+      }
+      return parsedData;
+    }
+    return [];
   });
 
   useEffect(() => {
@@ -279,9 +299,51 @@ const App = () => {
   }, [currentFrameworkDetails, selectedFramework, formData, customInputs]);
 
 
-  const handleSavePrompt = (promptData: any) => {
-    setSavedPrompts(prev => [...prev, promptData]);
-    toast.success('Prompt berhasil disimpan!');
+  const handleSavePrompt = (promptData: {
+    frameworkName: string;
+    category: string;
+    subcategory: string;
+    formData: { [key: string]: any };
+    customInputs: { [key: string]: string };
+    naturalLanguageOutput: string;
+    jsonOutput: string;
+    id?: string; // Allow existing ID for updates
+  }) => {
+    setSavedPrompts(prevSavedPrompts => {
+      const existingPromptIndex = prevSavedPrompts.findIndex(
+        p => p.id === promptData.id // Check if ID exists for update
+      );
+
+      const newVersion: SavedPromptVersion = {
+        timestamp: Date.now(),
+        formData: promptData.formData,
+        customInputs: promptData.customInputs,
+        naturalLanguageOutput: promptData.naturalLanguageOutput,
+        jsonOutput: promptData.jsonOutput,
+      };
+
+      if (existingPromptIndex > -1) {
+        // Update existing prompt with new version
+        const updatedPrompts = [...prevSavedPrompts];
+        updatedPrompts[existingPromptIndex] = {
+          ...updatedPrompts[existingPromptIndex],
+          versions: [...updatedPrompts[existingPromptIndex].versions, newVersion],
+        };
+        toast.success('Prompt berhasil diperbarui dengan versi baru!');
+        return updatedPrompts;
+      } else {
+        // Add new prompt
+        const newPrompt: SavedPrompt = {
+          id: Date.now().toString() + Math.random().toString(36).substring(2, 9), // Generate unique ID for new prompt
+          frameworkName: promptData.frameworkName,
+          category: promptData.category,
+          subcategory: promptData.subcategory,
+          versions: [newVersion],
+        };
+        toast.success('Prompt berhasil disimpan!');
+        return [...prevSavedPrompts, newPrompt];
+      }
+    });
   };
 
   const handleExportPrompts = (prompts: any[]) => {
@@ -328,13 +390,21 @@ const App = () => {
     toast.success('Prompt berhasil diganti nama!');
   };
 
-  const handleLoadPrompt = (promptData: any) => {
-    setSelectedCategory(promptData.category);
-    setSelectedFramework(promptData.frameworkName);
-    setFormData(promptData.formData);
-    setCustomInputs(promptData.customInputs);
-    // setNaturalLanguageOutput(promptData.naturalLanguageOutput); // This is now derived
-    // setJsonOutput(promptData.jsonOutput); // This is now derived
+  const handleLoadPrompt = (versionData: SavedPromptVersion) => {
+    // Find the parent prompt to get category and frameworkName
+    const parentPrompt = savedPrompts.find(p => p.versions.some(v => v.timestamp === versionData.timestamp && v.formData === versionData.formData));
+
+    if (parentPrompt) {
+      setSelectedCategory(parentPrompt.category);
+      setSelectedFramework(parentPrompt.frameworkName);
+      setFormData(versionData.formData);
+      setCustomInputs(versionData.customInputs);
+      setNaturalLanguageOutput(versionData.naturalLanguageOutput);
+      setJsonOutput(versionData.jsonOutput);
+      toast.info(`Versi prompt dari ${new Date(versionData.timestamp).toLocaleString()} berhasil dimuat.`);
+    } else {
+      toast.error("Gagal memuat versi prompt: Prompt induk tidak ditemukan.");
+    }
   };
 
   const handleUseAsInput = (outputContent: string) => {
