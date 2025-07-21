@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Button, Spinner } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dracula } from "react-syntax-highlighter/dist/styles/dracula";
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { FaCopy, FaRobot } from "react-icons/fa";
 
 interface AiResponseModalProps {

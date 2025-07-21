@@ -6,24 +6,24 @@ import './index.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { PROMPT_FRAMEWORKS, CATEGORY_ORDER, Framework, FrameworkComponent, PromptFrameworksType } from './src/data/frameworks';
-import { COMMON_FIELDS } from './src/config';
-import { generateNaturalLanguagePrompt, generateJsonPrompt } from './src/utils/promptGenerators';
-import { callGeminiApi } from './src/utils/api';
-import { validateInput } from './src/utils/validation';
+import { PROMPT_FRAMEWORKS, CATEGORY_ORDER, Framework, FrameworkComponent, PromptFrameworksType } from '@/data/frameworks';
+import { COMMON_FIELDS } from '@/config';
+import { generateNaturalLanguagePrompt, generateJsonPrompt } from '@/utils/promptGenerators';
+import { callGeminiApi } from '@/utils/api';
+import { validateInput } from '@/utils/validation';
 
-const Header = React.lazy(() => import('./src/components/Header'));
-const NavigationPane = React.lazy(() => import('./src/components/NavigationPane'));
-const FrameworkPane = React.lazy(() => import('./src/components/FrameworkPane'));
-const OutputDisplay = React.lazy(() => import('./src/components/OutputDisplay'));
-const InputSelectionModal = React.lazy(() => import('./src/components/InputSelectionModal'));
-const SavedPromptsDisplay = React.lazy(() => import('./src/components/SavedPromptsDisplay'));
-const HelpModal = React.lazy(() => import('./src/components/HelpModal'));
-const ErrorBoundary = React.lazy(() => import('./src/components/ErrorBoundary'));
-const Footer = React.lazy(() => import('./src/components/Footer'));
+const Header = React.lazy(() => import('@/components/Header'));
+const NavigationPane = React.lazy(() => import('@/components/NavigationPane'));
+const FrameworkPane = React.lazy(() => import('@/components/FrameworkPane'));
+const OutputDisplay = React.lazy(() => import('@/components/OutputDisplay'));
+const InputSelectionModal = React.lazy(() => import('@/components/InputSelectionModal'));
+const SavedPromptsDisplay = React.lazy(() => import('@/components/SavedPromptsDisplay'));
+const HelpModal = React.lazy(() => import('@/components/HelpModal'));
+const ErrorBoundary = React.lazy(() => import('@/components/ErrorBoundary'));
+const Footer = React.lazy(() => import('@/components/Footer'));
 
 
-import { useFrameworkNavigation } from './src/hooks/useFrameworkNavigation';
+import { useFrameworkNavigation } from '@/hooks/useFrameworkNavigation';
 
 const App = () => {
   const dispatch = (action: { type: string; payload?: any }) => {
