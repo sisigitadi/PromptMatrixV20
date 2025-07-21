@@ -37,7 +37,7 @@ export default defineConfig(({ mode }) => {
           },
         },
       },
-      base: '/PromptMatrixV20/',
+      base: '/',
       optimizeDeps: {
       },
       plugins: [
