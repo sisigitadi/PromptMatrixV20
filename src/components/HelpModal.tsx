@@ -13,7 +13,7 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
 
   const loadMarkdown = async (filePath: string, title: string) => {
     try {
-      const response = await fetch(`${import.meta.env.BASE_URL}${filePath}`);
+      const response = await fetch(filePath);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -22,7 +22,9 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
       setDocumentTitle(title);
     } catch (error) {
       console.error("Failed to load markdown file:", error);
-      setMarkdownContent("Failed to load content.");
+      setMarkdownContent(
+        `Failed to load content. Error: ${error instanceof Error ? error.message : String(error)}`,
+      );
       setDocumentTitle("Error");
     }
   };
@@ -60,6 +62,48 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
         ) : (
           <>
             <h5>Selamat Datang di Prompt Matrix 2.0!</h5>
+            <div className="d-flex flex-wrap justify-content-around gap-3 mb-4">
+              <Button
+                variant="primary"
+                size="lg"
+                className="help-doc-button"
+                onClick={() =>
+                  loadMarkdown(
+                    "/docs/PanduanPenggunaanInteraktif.md",
+                    "Panduan Penggunaan Interaktif",
+                  )
+                }
+                aria-label="Baca Panduan Penggunaan Interaktif"
+              >
+                <i className="bi bi-book me-2"></i>
+                <span>Panduan</span>
+              </Button>
+              <Button
+                variant="primary"
+                size="lg"
+                className="help-doc-button"
+                onClick={() => loadMarkdown("/docs/FAQ.md", "FAQ")}
+                aria-label="Baca FAQ"
+              >
+                <i className="bi bi-question-circle me-2"></i>
+                <span>FAQ</span>
+              </Button>
+              <Button
+                variant="primary"
+                size="lg"
+                className="help-doc-button"
+                onClick={() =>
+                  loadMarkdown(
+                    "/docs/DaftarKerangkaKerja.md",
+                    "Daftar Kerangka Kerja",
+                  )
+                }
+                aria-label="Lihat Daftar Kerangka Kerja"
+              >
+                <i className="bi bi-list-columns-reverse me-2"></i>
+                <span>Kerangka Kerja</span>
+              </Button>
+            </div>
             <p>
               Aplikasi ini dirancang untuk membantu Anda membuat prompt AI yang
               terstruktur dan efektif.
@@ -101,67 +145,6 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
               Komprehensif, Dinamis, Relevan, Detail, memiliki Logika AI, dan
               Perspektif Pengguna.
             </p>
-            <hr />
-            <h6>Dokumentasi:</h6>
-            <div className="d-flex flex-wrap justify-content-around">
-              <Button
-                variant="link"
-                className="help-doc-icon text-decoration-none"
-                onClick={() => loadMarkdown("/docs/README.md", "README")}
-                aria-label="Baca dokumentasi README"
-              >
-                <i className="bi bi-file-earmark-text"></i>
-                <span>README</span>
-              </Button>
-              <Button
-                variant="link"
-                className="help-doc-icon text-decoration-none"
-                onClick={() => loadMarkdown("/docs/FAQ.md", "FAQ")}
-                aria-label="Baca FAQ"
-              >
-                <i className="bi bi-question-circle"></i>
-                <span>FAQ</span>
-              </Button>
-              <Button
-                variant="link"
-                className="help-doc-icon text-decoration-none"
-                onClick={() =>
-                  loadMarkdown(
-                    "/docs/PanduanPenggunaanInteraktif.md",
-                    "Panduan Penggunaan Interaktif",
-                  )
-                }
-                aria-label="Baca Panduan Penggunaan Interaktif"
-              >
-                <i className="bi bi-book"></i>
-                <span>Panduan</span>
-              </Button>
-              <Button
-                variant="link"
-                className="help-doc-icon text-decoration-none"
-                onClick={() =>
-                  loadMarkdown("/docs/release.md", "Catatan Rilis")
-                }
-                aria-label="Baca Catatan Rilis"
-              >
-                <i className="bi bi-journal-text"></i>
-                <span>Rilis</span>
-              </Button>
-              <Button
-                variant="link"
-                className="help-doc-icon text-decoration-none"
-                onClick={() =>
-                  loadMarkdown(
-                    "/docs/DaftarKerangkaKerja.md",
-                    "Daftar Kerangka Kerja",
-                  )
-                }
-                aria-label="Lihat Daftar Kerangka Kerja"
-              >
-                <i className="bi bi-list-columns-reverse"></i>
-                <span>Kerangka Kerja</span>
-              </Button>
-            </div>
             <p className="mt-3">
               Untuk informasi lebih lanjut, silakan email ke{" "}
               <strong>
@@ -169,6 +152,8 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
               </strong>
               .
             </p>
+            <hr />
+            <div className="d-flex flex-wrap justify-content-around"></div>
           </>
         )}
       </Modal.Body>
