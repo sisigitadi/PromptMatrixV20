@@ -82,7 +82,9 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
                 variant="primary"
                 size="lg"
                 className="help-doc-button"
-                onClick={() => loadMarkdown("/PromptMatrixV20/docs/FAQ.md", "FAQ")}
+                onClick={() =>
+                  loadMarkdown("/PromptMatrixV20/docs/FAQ.md", "FAQ")
+                }
                 aria-label="Baca FAQ"
               >
                 <i className="bi bi-question-circle me-2"></i>
