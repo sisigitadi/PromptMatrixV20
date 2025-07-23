@@ -24,6 +24,8 @@ interface NavigationPaneProps {
   isLoading: boolean; // Added isLoading prop
 }
 
+import { categoryCssNameMap } from "../utils/categoryUtils";
+
 const NavigationPane: React.FC<NavigationPaneProps> = ({
   selectedCategory,
   searchQuery,
@@ -48,15 +50,16 @@ const NavigationPane: React.FC<NavigationPaneProps> = ({
           1. Pilih Kategori / Cari Kerangka Kerja:
         </h2>
         <Row className="mb-3 g-2">
-          {CATEGORY_ORDER.sort().map((categoryName) => (
+          {CATEGORY_ORDER.map((categoryName, index) => (
             <Col xs={12} md={6} key={categoryName}>
               <Button
-                variant={
-                  selectedCategory === categoryName ? "primary" : "secondary"
-                }
                 onClick={() => handleCategorySelect(categoryName)}
-                className={`category-toggle-button w-100 ${selectedCategory === categoryName ? "active" : ""}`}
+                className={`btn w-100 category-button-dynamic ${categoryCssNameMap[categoryName]}${selectedCategory === categoryName ? " active" : ""}`}
                 aria-pressed={selectedCategory === categoryName}
+                style={{
+                  background: `var(--category-${categoryCssNameMap[categoryName]}-static)`,
+                  borderColor: `var(--category-${categoryCssNameMap[categoryName]}-static)`,
+                }}
               >
                 {categoryName}
               </Button>
@@ -100,8 +103,7 @@ const NavigationPane: React.FC<NavigationPaneProps> = ({
                         .map(([subcategoryName, frameworks]) => (
                           <div key={subcategoryName}>
                             <Button
-                              variant="link"
-                              className="subcategory-header w-100 text-start d-flex justify-content-between align-items-center"
+                              className={`subcategory-header w-100 text-start d-flex justify-content-between align-items-center category-button-dynamic ${categoryCssNameMap[categoryName]}`}
                               onClick={() =>
                                 handleSubcategoryToggle(subcategoryName)
                               }
@@ -109,6 +111,10 @@ const NavigationPane: React.FC<NavigationPaneProps> = ({
                                 openSubcategories[subcategoryName] ||
                                 manualOpenSubcategories[subcategoryName]
                               }
+                              style={{
+                                background: `var(--category-${categoryCssNameMap[categoryName]}-static)`,
+                                borderColor: `var(--category-${categoryCssNameMap[categoryName]}-static)`,
+                              }}
                             >
                               {subcategoryName}{" "}
                               <span
@@ -129,8 +135,7 @@ const NavigationPane: React.FC<NavigationPaneProps> = ({
                                   .map(([name, details]) => (
                                     <Button
                                       key={name}
-                                      variant="link"
-                                      className="category-card w-100 text-start"
+                                      className={`category-card w-100 text-start p-3 category-button-dynamic ${categoryCssNameMap[categoryName]}`}
                                       onClick={() =>
                                         handleFrameworkSelect(
                                           name,
@@ -138,6 +143,10 @@ const NavigationPane: React.FC<NavigationPaneProps> = ({
                                           subcategoryName,
                                         )
                                       }
+                                      style={{
+                                        background: `var(--category-${categoryName.toLowerCase().replace(/ /g, "-").replace(/&/g, "and")}-static)`,
+                                        borderColor: `var(--category-${categoryName.toLowerCase().replace(/ /g, "-").replace(/&/g, "and")}-static)`,
+                                      }}
                                     >
                                       <strong>📄 {name}</strong>
                                     </Button>

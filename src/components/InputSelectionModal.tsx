@@ -9,6 +9,7 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { PROMPT_FRAMEWORKS, Framework } from "../data/frameworks";
+import { categoryCssNameMap } from "../utils/categoryUtils";
 
 interface InputSelectionModalProps {
   show: boolean;
@@ -187,7 +188,9 @@ const InputSelectionModal: React.FC<InputSelectionModalProps> = ({
                   .sort((a, b) => a[0].localeCompare(b[0]))
                   .map(([categoryName, subcategories]) => (
                     <Accordion.Item eventKey={categoryName} key={categoryName}>
-                      <Accordion.Header className="accordion-header-themed">
+                      <Accordion.Header
+                        className={`accordion-header-themed category-button-dynamic ${categoryCssNameMap[categoryName]}`}
+                      >
                         {categoryName}
                       </Accordion.Header>
                       <Accordion.Body className="p-0">
@@ -196,7 +199,9 @@ const InputSelectionModal: React.FC<InputSelectionModalProps> = ({
                             .sort((a, b) => a[0].localeCompare(b[0]))
                             .map(([subcategoryName, frameworks]) => (
                               <div key={subcategoryName}>
-                                <ListGroup.Item className="subcategory-header list-group-item-themed">
+                                <ListGroup.Item
+                                  className={`subcategory-header list-group-item-themed category-button-dynamic ${categoryCssNameMap[categoryName]}`}
+                                >
                                   {subcategoryName}
                                 </ListGroup.Item>
                                 {Object.entries(frameworks)

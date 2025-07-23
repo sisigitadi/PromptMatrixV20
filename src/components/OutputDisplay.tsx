@@ -221,6 +221,14 @@ const OutputDisplay: React.FC<OutputDisplayProps> = ({
               placeholder="Prompt Anda yang terstruktur lengkap akan disusun dan ditampilkan di sini..."
               aria-label="Output Prompt"
               readOnly={!isEditable} // Control editability
+              style={{
+                padding: "clamp(1rem, 2vw, 1.5rem)",
+                fontSize: "clamp(0.85rem, 1.2vw, 1rem)",
+                maxHeight: "60vh", // Add a max height
+                overflowY: "auto", // Add scroll if content exceeds max height
+                whiteSpace: "pre-wrap",
+                wordBreak: "break-word",
+              }}
             />
             {outputType === "natural" && (
               <div className="d-flex justify-content-end small mb-2">

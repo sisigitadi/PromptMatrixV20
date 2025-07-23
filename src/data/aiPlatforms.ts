@@ -39,13 +39,7 @@ export const AI_PLATFORMS: AiPlatformConfig[] = [
         name: "selectedModel",
         label: "Pilih Model Gemini",
         type: "select",
-        options: [
-          "gemini-pro",
-          "gemini-pro-vision",
-          "gemini-2.5-pro",
-          "gemini-2.5-flash",
-          "gemini-2.5-flash-lite-preview",
-        ],
+        options: [],
         info: "Pilih model Gemini yang akan digunakan.",
       },
     ],
@@ -76,12 +70,7 @@ export const AI_PLATFORMS: AiPlatformConfig[] = [
         name: "selectedHfModel",
         label: "Pilih Model Hugging Face",
         type: "select",
-        options: [
-          "default", // Placeholder
-          "HuggingFaceH4/zephyr-7b-beta",
-          "mistralai/Mistral-7B-Instruct-v0.2",
-          "google/gemma-7b-it",
-        ],
+        options: [],
         info: "Pilih model Hugging Face yang akan digunakan.",
       },
     ],

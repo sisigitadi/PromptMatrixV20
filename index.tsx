@@ -122,24 +122,37 @@ const App = () => {
     });
   };
 
-  const handleInputChangeWithValidation = (name: string, value: string | number) => {
-    setTouchedFields(prev => ({ ...prev, [name]: true })); // Mark as touched
+  const handleInputChangeWithValidation = (name: string, value: string | number, inputDetails: FrameworkComponent) => {
     if (COMMON_FIELDS.includes(name)) {
       setCommonFields(prev => ({ ...prev, [name]: value }));
     }
     setFormData(prev => {
       const newFormData = { ...prev, [name]: value };
+      const error = validateInput(name, value, inputDetails);
+      setValidationErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors, [name]: error };
+        return updatedErrors;
+      });
       return newFormData;
     });
   };
 
   const handleCustomInputChangeWithValidation = (name: string, value: string, inputDetails: FrameworkComponent) => {
-    setTouchedFields(prev => ({ ...prev, [name]: true })); // Mark as touched
     setCustomInputs(prev => {
       const newCustomInputs = { ...prev, [name]: value };
       const error = validateInput(name, value, inputDetails);
-      setValidationErrors(prevErrors => ({ ...prevErrors, [name]: error }));
+      setValidationErrors(prevErrors => {
+        const updatedErrors = { ...prevErrors, [name]: error };
+        return updatedErrors;
+      });
       return newCustomInputs;
+    });
+  };
+
+  const handleInputBlur = (name: string) => {
+    setTouchedFields(prev => {
+      const updatedTouched = { ...prev, [name]: true };
+      return updatedTouched;
     });
   };
 
@@ -157,7 +170,6 @@ const App = () => {
         setShowDevMode(true);
         setIsApiKeyEnabled(true); // Set API Key to ENABLED when Dev Mode is activated
         setLogoClickCount(0); // Reset count after showing dev mode
-        console.log('Dev Mode activated. showDevMode:', true, 'isApiKeyEnabled:', true);
       }
       return newCount;
     });
@@ -367,7 +379,7 @@ const App = () => {
 
     // Filter out duplicates based on ID, prioritizing imported prompts if IDs clash
     const existingPromptIds = new Set(savedPrompts.map(p => p.id));
-    const newPrompts = importedPrompts.filter(p => !existingPromptIds.has(p.id));
+    const newPrompts = importedPromoted.filter(p => !existingPromptIds.has(p.id));
 
     setSavedPrompts(prev => [...prev, ...newPrompts]);
     toast.success(`${newPrompts.length} prompt berhasil diimpor!`);
@@ -443,7 +455,7 @@ const App = () => {
         setIsLightTheme={setIsLightTheme}
       />
       <Container fluid className={`main-container p-4 ${showDevMode ? 'dev-mode-glow' : ''}`} style={{ backgroundColor: appBackgroundColor }}>
-        <Row className="flex-grow-1 g-4">
+        <Row className="flex-grow-1 g-4 align-items-stretch">
           <Col xs={12} md={4} lg={4} className="navigation-pane h-100" id="navigation-pane">
             <NavigationPane
               selectedCategory={selectedCategory}
@@ -484,6 +496,7 @@ const App = () => {
               handleCustomInputChangeWithValidation={handleCustomInputChangeWithValidation}
               validationErrors={validationErrors}
               touchedFields={touchedFields}
+              handleInputBlur={handleInputBlur}
               showToast={toast}
             />
           </Col>

@@ -89,7 +89,7 @@ const PromptActions: React.FC<PromptActionsProps> = ({
           <Button
             variant="primary"
             onClick={handleSave}
-            className="flex-grow-1 me-2"
+            className="flex-grow-1 me-2 glow-on-hover"
             aria-label="Simpan Prompt Saat Ini"
           >
             💾 Simpan Prompt
@@ -97,15 +97,15 @@ const PromptActions: React.FC<PromptActionsProps> = ({
           <Button
             variant="success"
             onClick={handleExport}
-            className="flex-grow-1 me-2"
+            className="flex-grow-1 me-2 glow-on-hover"
             aria-label="Ekspor Semua Prompt Tersimpan"
           >
             📤 Ekspor Prompt
           </Button>
           <Button
-            variant="secondary"
+            variant="info"
             onClick={handleImport}
-            className="flex-grow-1 me-2"
+            className="flex-grow-1 me-2 glow-on-hover"
             aria-label="Impor Prompt dari File"
           >
             📥 Impor Prompt
@@ -114,8 +114,8 @@ const PromptActions: React.FC<PromptActionsProps> = ({
             onClick={() => setOpenSavedPrompts(!openSavedPrompts)}
             aria-controls="saved-prompts-collapse-text"
             aria-expanded={openSavedPrompts}
-            variant="info"
-            className="flex-grow-1"
+            variant="warning"
+            className="flex-grow-1 glow-on-hover"
           >
             📚 Prompt Tersimpan ({savedPrompts.length})
           </Button>
@@ -132,23 +132,26 @@ const PromptActions: React.FC<PromptActionsProps> = ({
                 {savedPrompts.map((prompt) => (
                   <ListGroup.Item
                     key={prompt.id}
-                    className="d-flex justify-content-between align-items-center py-2 px-1"
+                    className="d-flex justify-content-between align-items-start py-2 px-1"
                   >
                     <div className="flex-grow-1 me-2">
-                      <strong className="d-block">
+                      <strong
+                        className="d-block text-truncate"
+                        style={{ maxWidth: "calc(100% - 140px)" }}
+                      >
                         {prompt.frameworkName}
                       </strong>
                       <small className="d-block">
                         {new Date(prompt.timestamp).toLocaleString()}
                       </small>
-                      <small
-                        className="d-block text-truncate"
-                        style={{ maxWidth: "200px" }}
-                      >
+                      <small className="d-block">
                         {prompt.naturalLanguageOutput.substring(0, 50)}...
                       </small>
                     </div>
-                    <div className="d-flex flex-column">
+                    <div
+                      className="d-flex flex-column"
+                      style={{ width: "120px" }}
+                    >
                       <Button
                         variant="outline-primary"
                         size="sm"

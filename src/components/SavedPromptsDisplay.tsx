@@ -91,36 +91,30 @@ const SavedPromptsDisplay: React.FC<SavedPromptsDisplayProps> = ({
   });
 
   return (
-    <Modal
-      show={show}
-      onHide={onHide}
-      size="lg"
-      centered
-      dialogClassName="modal-themed"
-    >
+    <Modal show={show} onHide={onHide} centered dialogClassName="modal-themed">
       <Modal.Header closeButton className="modal-header-themed">
-        <Modal.Title>📚 Prompt Tersimpan</Modal.Title>
+        <Modal.Title>📚 Prompt Tersimpan & Riwayat</Modal.Title>
       </Modal.Header>
       <Modal.Body className="modal-body-themed">
         <div className="d-flex justify-content-between align-items-center mb-3">
-          <div>
+          <div className="d-flex">
             <Button
               variant="success"
               className="me-2"
               onClick={() => onExportPrompts(savedPrompts)}
-              aria-label="Ekspor Semua Prompt Tersimpan"
+              aria-label="Ekspor Semua Prompt Tersimpan ⬇️"
             >
-              📤 Ekspor
+              ⬇️ Ekspor
             </Button>
             <Button
               variant="info"
               onClick={handleImport}
-              aria-label="Impor Prompt dari File"
+              aria-label="Impor Prompt dari File ⬆️"
             >
-              📥 Impor
+              ⬆️ Impor
             </Button>
           </div>
-          <Form.Group controlId="sortBySelect" className="mb-0">
+          <Form.Group controlId="sortBySelect" className="mb-0 ms-3">
             <Form.Select
               size="sm"
               value={sortBy}
@@ -142,7 +136,7 @@ const SavedPromptsDisplay: React.FC<SavedPromptsDisplayProps> = ({
                 className="list-group-item-themed"
               >
                 {promptToRename?.id === prompt.id ? (
-                  <InputGroup>
+                  <InputGroup className="flex-grow-1">
                     <Form.Control
                       type="text"
                       value={newPromptName}
@@ -160,63 +154,75 @@ const SavedPromptsDisplay: React.FC<SavedPromptsDisplayProps> = ({
                     </Button>
                   </InputGroup>
                 ) : (
-                  <div className="d-flex justify-content-between align-items-center">
-                    <div>
-                      <strong>{prompt.frameworkName}</strong>
-                      <br />
-                      <small>
-                        Disimpan: {""}
+                  <div className="d-flex justify-content-between w-100">
+                    <div
+                      className="flex-grow-1 me-2"
+                      style={{
+                        whiteSpace: "normal",
+                        overflowWrap: "break-word",
+                      }}
+                    >
+                      <strong
+                        style={{
+                          fontSize: "1em",
+                          marginBottom: "0.1em",
+                          display: "block",
+                        }}
+                      >
+                        {prompt.frameworkName}
+                      </strong>
+                      <small style={{ fontSize: "0.75em", display: "block" }}>
                         {new Date(
                           prompt.versions[prompt.versions.length - 1].timestamp,
-                        ).toLocaleString()}
+                        ).toLocaleDateString()}{" "}
+                        {new Date(
+                          prompt.versions[prompt.versions.length - 1].timestamp,
+                        ).toLocaleTimeString()}
                       </small>
-                    </div>
-                    <div className="prompt-actions">
-                      <Button
-                        variant="info"
-                        size="sm"
-                        className="me-2"
-                        onClick={() => handleToggleExpand(prompt.id)}
-                        title="Lihat Riwayat Versi"
-                        aria-label="Lihat Riwayat Versi"
-                      >
-                        {expandedPromptId === prompt.id
-                          ? "⬆️ Sembunyikan"
-                          : "⬇️ Riwayat"}
-                      </Button>
-                      <Button
-                        variant="primary"
-                        size="sm"
-                        className="me-2"
-                        onClick={() =>
-                          onLoadPrompt(
-                            prompt.versions[prompt.versions.length - 1],
-                          )
-                        }
-                        title="Muat Versi Terbaru"
-                        aria-label="Muat Versi Terbaru"
-                      >
-                        📥
-                      </Button>
-                      <Button
-                        variant="warning"
-                        size="sm"
-                        className="me-2"
-                        onClick={() => handleRenameClick(prompt)}
-                        title="Ganti Nama"
-                        aria-label="Ganti Nama Prompt"
-                      >
-                        ✏️
-                      </Button>
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        onClick={() => onDeletePrompt(prompt.id)}
-                        title="Hapus Prompt"
-                        aria-label="Hapus Prompt"
-                      >
-                        🗑️
-                      </Button>
+                      <div className="prompt-actions d-flex flex-wrap gap-1 mt-2">
+                        <Button
+                          variant="info"
+                          size="sm"
+                          onClick={() => handleToggleExpand(prompt.id)}
+                          title="Lihat Riwayat Versi"
+                          aria-label="Lihat Riwayat Versi"
+                        >
+                          {expandedPromptId === prompt.id
+                            ? "⬆️ Sembunyikan"
+                            : "⬇️ Riwayat"}
+                        </Button>
+                        <Button
+                          variant="primary"
+                          size="sm"
+                          onClick={() =>
+                            onLoadPrompt(
+                              prompt.versions[prompt.versions.length - 1],
+                            )
+                          }
+                          title="Muat Versi Terbaru"
+                          aria-label="Muat Versi Terbaru"
+                        >
+                          ▶️
+                        </Button>
+                        <Button
+                          variant="warning"
+                          size="sm"
+                          onClick={() => handleRenameClick(prompt)}
+                          title="Ganti Nama"
+                          aria-label="Ganti Nama Prompt"
+                        >
+                          ✏️
+                        </Button>
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          onClick={() => onDeletePrompt(prompt.id)}
+                          title="Hapus Prompt"
+                          aria-label="Hapus Prompt"
+                        >
+                          🗑️
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -240,7 +246,7 @@ const SavedPromptsDisplay: React.FC<SavedPromptsDisplayProps> = ({
                             title="Muat Versi Ini"
                             aria-label={`Muat Versi ${index + 1}`}
                           >
-                            Muat
+                            ▶️
                           </Button>
                         </ListGroup.Item>
                       ))}

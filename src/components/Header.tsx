@@ -36,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({
               alt="PromptMatrix 2.0 Logo"
               className="logo-glow"
               style={{
-                height: "30px",
+                height: "clamp(25px, 4vw, 40px)", // Responsive height
                 marginRight: "10px",
                 cursor: "pointer",
                 position: "relative",

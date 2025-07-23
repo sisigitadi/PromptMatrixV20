@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Button, Spinner } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
+
 import { FaCopy, FaRobot } from "react-icons/fa";
 
 interface AiResponseModalProps {
@@ -67,7 +67,7 @@ const AiResponseModal: React.FC<AiResponseModalProps> = ({
                 style={{
                   backgroundColor: "var(--panel-card-color)",
                   color: "var(--text-color)",
-                  maxHeight: "60vh",
+                  maxHeight: "clamp(300px, 60vh, 800px)", // Responsive max-height
                   overflowY: "auto",
                 }}
               >
@@ -77,7 +77,6 @@ const AiResponseModal: React.FC<AiResponseModalProps> = ({
                       const match = /language-(\w+)/.exec(className || "");
                       return !inline && match ? (
                         <SyntaxHighlighter
-                          style={dracula}
                           language={match[1]}
                           PreTag="div"
                           {...props}

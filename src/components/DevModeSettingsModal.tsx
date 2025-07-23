@@ -42,12 +42,21 @@ const DevModeSettingsModal: React.FC<DevModeSettingsModalProps> = ({
       </Modal.Header>
       <Modal.Body className="modal-body-themed">
         <Form.Group className="mb-3" controlId="geminiModelSelect">
-          <Form.Label className="small mb-1">Pilih Model Gemini:</Form.Label>
+          <Form.Label
+            className="small mb-1"
+            style={{ fontSize: "clamp(0.85rem, 1.5vw, 1rem)" }}
+          >
+            Pilih Model Gemini:
+          </Form.Label>
           <Form.Select
             name="geminiModel"
             value={selectedModel}
             onChange={(e) => onModelSelect(e.target.value)}
             className="form-select"
+            style={{
+              padding: "clamp(0.5rem, 1vw, 0.75rem)",
+              fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
+            }}
           >
             <option value="gemini-2.5-pro">gemini-2.5-pro</option>
             <option value="gemini-2.5-flash">gemini-2.5-flash</option>
@@ -55,13 +64,22 @@ const DevModeSettingsModal: React.FC<DevModeSettingsModalProps> = ({
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="apiKeyInput">
-          <Form.Label className="small mb-1">API Key Gemini:</Form.Label>
+          <Form.Label
+            className="small mb-1"
+            style={{ fontSize: "clamp(0.85rem, 1.5vw, 1rem)" }}
+          >
+            API Key Gemini:
+          </Form.Label>
           <InputGroup>
             <Form.Control
               type={showApiKey ? "text" : "password"}
               placeholder="Masukkan API Key Anda"
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
+              style={{
+                padding: "clamp(0.5rem, 1vw, 0.75rem)",
+                fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
+              }}
             />
             <Button
               variant="outline-secondary"
@@ -76,7 +94,12 @@ const DevModeSettingsModal: React.FC<DevModeSettingsModalProps> = ({
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="temperatureInput">
-          <Form.Label className="small mb-1">Temperature (0-1):</Form.Label>
+          <Form.Label
+            className="small mb-1"
+            style={{ fontSize: "clamp(0.85rem, 1.5vw, 1rem)" }}
+          >
+            Temperature (0-1):
+          </Form.Label>
           <Form.Control
             type="number"
             step="0.1"
@@ -92,6 +115,10 @@ const DevModeSettingsModal: React.FC<DevModeSettingsModalProps> = ({
               )
             }
             isInvalid={!!validationErrors.temperature}
+            style={{
+              padding: "clamp(0.5rem, 1vw, 0.75rem)",
+              fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
+            }}
           />
           {validationErrors.temperature && (
             <Form.Control.Feedback type="invalid">
@@ -101,7 +128,12 @@ const DevModeSettingsModal: React.FC<DevModeSettingsModalProps> = ({
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="topPInput">
-          <Form.Label className="small mb-1">Top P (0-1):</Form.Label>
+          <Form.Label
+            className="small mb-1"
+            style={{ fontSize: "clamp(0.85rem, 1.5vw, 1rem)" }}
+          >
+            Top P (0-1):
+          </Form.Label>
           <Form.Control
             type="number"
             step="0.1"
@@ -117,6 +149,10 @@ const DevModeSettingsModal: React.FC<DevModeSettingsModalProps> = ({
               )
             }
             isInvalid={!!validationErrors.top_p}
+            style={{
+              padding: "clamp(0.5rem, 1vw, 0.75rem)",
+              fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
+            }}
           />
           {validationErrors.top_p && (
             <Form.Control.Feedback type="invalid">
@@ -126,7 +162,12 @@ const DevModeSettingsModal: React.FC<DevModeSettingsModalProps> = ({
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="topKInput">
-          <Form.Label className="small mb-1">Top K (&gt;=1):</Form.Label>
+          <Form.Label
+            className="small mb-1"
+            style={{ fontSize: "clamp(0.85rem, 1.5vw, 1rem)" }}
+          >
+            Top K (&gt;=1):
+          </Form.Label>
           <Form.Control
             type="number"
             min="1"
@@ -140,6 +181,10 @@ const DevModeSettingsModal: React.FC<DevModeSettingsModalProps> = ({
               )
             }
             isInvalid={!!validationErrors.top_k}
+            style={{
+              padding: "clamp(0.5rem, 1vw, 0.75rem)",
+              fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
+            }}
           />
           {validationErrors.top_k && (
             <Form.Control.Feedback type="invalid">

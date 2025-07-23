@@ -51,9 +51,9 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
         {markdownContent ? (
           <>
             <Button
-              variant="secondary"
+              variant="outline-info"
               onClick={handleBackToHelp}
-              className="mb-3"
+              className="mb-3 glow-on-hover"
             >
               Kembali ke Bantuan
             </Button>
@@ -63,10 +63,8 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
           <>
             <h5>Selamat Datang di Prompt Matrix 2.0!</h5>
             <div className="d-flex flex-wrap justify-content-around gap-3 mb-4">
-              <Button
-                variant="primary"
-                size="lg"
-                className="help-doc-button"
+              <button
+                className="help-doc-icon btn btn-vibrant-green"
                 onClick={() =>
                   loadMarkdown(
                     "/PromptMatrixV20/docs/PanduanPenggunaanInteraktif.md",
@@ -75,25 +73,21 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
                 }
                 aria-label="Baca Panduan Penggunaan Interaktif"
               >
-                <i className="bi bi-book me-2"></i>
+                <i className="bi bi-book"></i>
                 <span>Panduan</span>
-              </Button>
-              <Button
-                variant="primary"
-                size="lg"
-                className="help-doc-button"
+              </button>
+              <button
+                className="help-doc-icon btn btn-electric-purple"
                 onClick={() =>
                   loadMarkdown("/PromptMatrixV20/docs/FAQ.md", "FAQ")
                 }
                 aria-label="Baca FAQ"
               >
-                <i className="bi bi-question-circle me-2"></i>
+                <i className="bi bi-question-circle"></i>
                 <span>FAQ</span>
-              </Button>
-              <Button
-                variant="primary"
-                size="lg"
-                className="help-doc-button"
+              </button>
+              <button
+                className="help-doc-icon btn btn-cyber-orange"
                 onClick={() =>
                   loadMarkdown(
                     "docs/DaftarKerangkaKerja.md",
@@ -102,9 +96,9 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
                 }
                 aria-label="Lihat Daftar Kerangka Kerja"
               >
-                <i className="bi bi-list-columns-reverse me-2"></i>
+                <i className="bi bi-list-columns-reverse"></i>
                 <span>Kerangka Kerja</span>
-              </Button>
+              </button>
             </div>
             <p>
               Aplikasi ini dirancang untuk membantu Anda membuat prompt AI yang

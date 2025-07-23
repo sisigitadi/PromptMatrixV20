@@ -53,6 +53,7 @@ interface FrameworkPaneProps {
   ) => void; // New prop
   validationErrors: { [key: string]: string }; // New prop
   touchedFields: { [key: string]: boolean }; // New prop
+  handleInputBlur: (name: string) => void; // New prop
 }
 
 const FrameworkPane: React.FC<FrameworkPaneProps> = ({
@@ -72,6 +73,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
   handleCustomInputChangeWithValidation,
   validationErrors,
   touchedFields,
+  handleInputBlur,
 }) => {
   const [isAiAssisting, setIsAiAssisting] = useState<{
     [key: string]: boolean;
@@ -243,44 +245,35 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
         {compType === "text" && (
           <div className="d-flex align-items-center">
             <InputGroup className="flex-grow-1">
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id={`tooltip-error-${compName}`}>
-                    {validationErrors[compName]}
-                  </Tooltip>
+              <Form.Control
+                type="text"
+                name={compName}
+                placeholder={compPlaceholder}
+                value={formData[compName] || ""}
+                onChange={(e) =>
+                  handleInputChangeWithValidation(
+                    compName,
+                    e.target.value,
+                    inputDetails,
+                  )
                 }
-                show={touchedFields[compName] && !!validationErrors[compName]}
-              >
-                <Form.Control
-                  type="text"
-                  name={compName}
-                  placeholder={compPlaceholder}
-                  value={formData[compName] || ""}
-                  onChange={(e) =>
-                    handleInputChangeWithValidation(
-                      compName,
-                      e.target.value,
-                      inputDetails,
-                    )
-                  }
-                  onMouseEnter={() => setHoveredField(compName)}
-                  onMouseLeave={() => setHoveredField(null)}
-                  isInvalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                  }
-                  aria-invalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? `validation-feedback-${compName}`
-                      : undefined
-                  }
-                />
-              </OverlayTrigger>
+                onBlur={() => handleInputBlur(compName)}
+                onMouseEnter={() => setHoveredField(compName)}
+                onMouseLeave={() => setHoveredField(null)}
+                isInvalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                }
+                aria-invalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? "true"
+                    : "false"
+                }
+                aria-describedby={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? `validation-feedback-${compName}`
+                    : undefined
+                }
+              />
               {formData[compName] && (
                 <Button
                   variant="outline-secondary"
@@ -294,12 +287,12 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 type="invalid"
                 id={`validation-feedback-${compName}`}
               >
-                {validationErrors[compName]}
+                {validationErrors[compName] || " "}
               </Form.Control.Feedback>
             </InputGroup>
             {showDevMode && (
               <Button
-                variant="outline-secondary"
+                variant="outline-primary"
                 onClick={() =>
                   handleAiAssist(
                     compName,
@@ -310,7 +303,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 }
                 disabled={isAiAssisting[compName]}
                 title="AI Assist"
-                className="ms-2"
+                className="ms-2 glow-on-hover"
               >
                 {isAiAssisting[compName] ? (
                   <Spinner as="span" animation="border" size="sm" />
@@ -324,44 +317,35 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
         {compType === "number" && (
           <div className="d-flex align-items-center">
             <InputGroup className="flex-grow-1">
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id={`tooltip-error-${compName}`}>
-                    {validationErrors[compName]}
-                  </Tooltip>
+              <Form.Control
+                type="number"
+                name={compName}
+                placeholder={compPlaceholder}
+                value={formData[compName] || ""}
+                onChange={(e) =>
+                  handleInputChangeWithValidation(
+                    compName,
+                    e.target.value,
+                    inputDetails,
+                  )
                 }
-                show={touchedFields[compName] && !!validationErrors[compName]}
-              >
-                <Form.Control
-                  type="number"
-                  name={compName}
-                  placeholder={compPlaceholder}
-                  value={formData[compName] || ""}
-                  onChange={(e) =>
-                    handleInputChangeWithValidation(
-                      compName,
-                      e.target.value,
-                      inputDetails,
-                    )
-                  }
-                  onMouseEnter={() => setHoveredField(compName)}
-                  onMouseLeave={() => setHoveredField(null)}
-                  isInvalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                  }
-                  aria-invalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? `validation-feedback-${compName}`
-                      : undefined
-                  }
-                />
-              </OverlayTrigger>
+                onBlur={() => handleInputBlur(compName)}
+                onMouseEnter={() => setHoveredField(compName)}
+                onMouseLeave={() => setHoveredField(null)}
+                isInvalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                }
+                aria-invalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? "true"
+                    : "false"
+                }
+                aria-describedby={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? `validation-feedback-${compName}`
+                    : undefined
+                }
+              />
               {formData[compName] && (
                 <Button
                   variant="outline-secondary"
@@ -375,12 +359,12 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 type="invalid"
                 id={`validation-feedback-${compName}`}
               >
-                {validationErrors[compName]}
+                {validationErrors[compName] || " "}
               </Form.Control.Feedback>
             </InputGroup>
             {showDevMode && (
               <Button
-                variant="outline-secondary"
+                variant="outline-primary"
                 onClick={() =>
                   handleAiAssist(
                     compName,
@@ -391,7 +375,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 }
                 disabled={isAiAssisting[compName]}
                 title="AI Assist"
-                className="ms-2"
+                className="ms-2 glow-on-hover"
               >
                 {isAiAssisting[compName] ? (
                   <Spinner as="span" animation="border" size="sm" />
@@ -405,48 +389,39 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
         {compType === "textarea" && (
           <div className="d-flex align-items-center">
             <InputGroup className="flex-grow-1">
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id={`tooltip-error-${compName}`}>
-                    {validationErrors[compName]}
-                  </Tooltip>
+              <Form.Control
+                as="textarea"
+                name={compName}
+                placeholder={compPlaceholder}
+                value={formData[compName] || ""}
+                onChange={(e) =>
+                  handleInputChangeWithValidation(
+                    compName,
+                    e.target.value,
+                    inputDetails,
+                  )
                 }
-                show={touchedFields[compName] && !!validationErrors[compName]}
-              >
-                <Form.Control
-                  as="textarea"
-                  name={compName}
-                  placeholder={compPlaceholder}
-                  value={formData[compName] || ""}
-                  onChange={(e) =>
-                    handleInputChangeWithValidation(
-                      compName,
-                      e.target.value,
-                      inputDetails,
-                    )
-                  }
-                  onMouseEnter={() => setHoveredField(compName)}
-                  onMouseLeave={() => setHoveredField(null)}
-                  rows={Math.max(
-                    3,
-                    (formData[compName] || "").split("\n").length + 1,
-                  )}
-                  isInvalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                  }
-                  aria-invalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? `validation-feedback-${compName}`
-                      : undefined
-                  }
-                />
-              </OverlayTrigger>
+                onBlur={() => handleInputBlur(compName)}
+                onMouseEnter={() => setHoveredField(compName)}
+                onMouseLeave={() => setHoveredField(null)}
+                rows={Math.max(
+                  3,
+                  (formData[compName] || "").split("\n").length + 1,
+                )}
+                isInvalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                }
+                aria-invalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? "true"
+                    : "false"
+                }
+                aria-describedby={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? `validation-feedback-${compName}`
+                    : undefined
+                }
+              />
               {formData[compName] && (
                 <Button
                   variant="outline-secondary"
@@ -460,12 +435,12 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 type="invalid"
                 id={`validation-feedback-${compName}`}
               >
-                {validationErrors[compName]}
+                {validationErrors[compName] || " "}
               </Form.Control.Feedback>
             </InputGroup>
             {showDevMode && (
               <Button
-                variant="outline-secondary"
+                variant="outline-primary"
                 onClick={() =>
                   handleAiAssist(
                     compName,
@@ -476,7 +451,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 }
                 disabled={isAiAssisting[compName]}
                 title="AI Assist"
-                className="ms-2"
+                className="ms-2 glow-on-hover"
               >
                 {isAiAssisting[compName] ? (
                   <Spinner as="span" animation="border" size="sm" />
@@ -504,6 +479,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                     inputDetails,
                   )
                 }
+                onBlur={() => handleInputBlur(compName)}
                 onMouseEnter={() => setHoveredField(compName)}
                 onMouseLeave={() => setHoveredField(null)}
                 rows={Math.max(
@@ -537,12 +513,12 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 type="invalid"
                 id={`validation-feedback-${compName}`}
               >
-                {validationErrors[compName]}
+                {validationErrors[compName] || " "}
               </Form.Control.Feedback>
             </InputGroup>
             {showDevMode && (
               <Button
-                variant="outline-secondary"
+                variant="outline-primary"
                 onClick={() =>
                   handleAiAssist(
                     compName,
@@ -553,7 +529,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 }
                 disabled={isAiAssisting[compName]}
                 title="AI Assist"
-                className="ms-2"
+                className="ms-2 glow-on-hover"
               >
                 {isAiAssisting[compName] ? (
                   <Spinner as="span" animation="border" size="sm" />
@@ -567,44 +543,35 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
         {compType === "color" && (
           <div className="d-flex align-items-center">
             <InputGroup className="flex-grow-1">
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id={`tooltip-error-${compName}`}>
-                    {validationErrors[compName]}
-                  </Tooltip>
+              <Form.Control
+                type="color"
+                name={compName}
+                placeholder={compPlaceholder}
+                value={formData[compName] || ""}
+                onChange={(e) =>
+                  handleInputChangeWithValidation(
+                    compName,
+                    e.target.value,
+                    inputDetails,
+                  )
                 }
-                show={touchedFields[compName] && !!validationErrors[compName]}
-              >
-                <Form.Control
-                  type="color"
-                  name={compName}
-                  placeholder={compPlaceholder}
-                  value={formData[compName] || ""}
-                  onChange={(e) =>
-                    handleInputChangeWithValidation(
-                      compName,
-                      e.target.value,
-                      inputDetails,
-                    )
-                  }
-                  onMouseEnter={() => setHoveredField(compName)}
-                  onMouseLeave={() => setHoveredField(null)}
-                  isInvalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                  }
-                  aria-invalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? `validation-feedback-${compName}`
-                      : undefined
-                  }
-                />
-              </OverlayTrigger>
+                onBlur={() => handleInputBlur(compName)}
+                onMouseEnter={() => setHoveredField(compName)}
+                onMouseLeave={() => setHoveredField(null)}
+                isInvalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                }
+                aria-invalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? "true"
+                    : "false"
+                }
+                aria-describedby={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? `validation-feedback-${compName}`
+                    : undefined
+                }
+              />
               {formData[compName] && (
                 <Button
                   variant="outline-secondary"
@@ -618,12 +585,12 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 type="invalid"
                 id={`validation-feedback-${compName}`}
               >
-                {validationErrors[compName]}
+                {validationErrors[compName] || " "}
               </Form.Control.Feedback>
             </InputGroup>
             {showDevMode && (
               <Button
-                variant="outline-secondary"
+                variant="outline-primary"
                 onClick={() =>
                   handleAiAssist(
                     compName,
@@ -634,7 +601,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 }
                 disabled={isAiAssisting[compName]}
                 title="AI Assist"
-                className="ms-2"
+                className="ms-2 glow-on-hover"
               >
                 {isAiAssisting[compName] ? (
                   <Spinner as="span" animation="border" size="sm" />
@@ -648,44 +615,35 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
         {compType === "date" && (
           <div className="d-flex align-items-center">
             <InputGroup className="flex-grow-1">
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id={`tooltip-error-${compName}`}>
-                    {validationErrors[compName]}
-                  </Tooltip>
+              <Form.Control
+                type="date"
+                name={compName}
+                placeholder={compPlaceholder}
+                value={formData[compName] || ""}
+                onChange={(e) =>
+                  handleInputChangeWithValidation(
+                    compName,
+                    e.target.value,
+                    inputDetails,
+                  )
                 }
-                show={touchedFields[compName] && !!validationErrors[compName]}
-              >
-                <Form.Control
-                  type="date"
-                  name={compName}
-                  placeholder={compPlaceholder}
-                  value={formData[compName] || ""}
-                  onChange={(e) =>
-                    handleInputChangeWithValidation(
-                      compName,
-                      e.target.value,
-                      inputDetails,
-                    )
-                  }
-                  onMouseEnter={() => setHoveredField(compName)}
-                  onMouseLeave={() => setHoveredField(null)}
-                  isInvalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                  }
-                  aria-invalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? `validation-feedback-${compName}`
-                      : undefined
-                  }
-                />
-              </OverlayTrigger>
+                onBlur={() => handleInputBlur(compName)}
+                onMouseEnter={() => setHoveredField(compName)}
+                onMouseLeave={() => setHoveredField(null)}
+                isInvalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                }
+                aria-invalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? "true"
+                    : "false"
+                }
+                aria-describedby={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? `validation-feedback-${compName}`
+                    : undefined
+                }
+              />
               {formData[compName] && (
                 <Button
                   variant="outline-secondary"
@@ -699,12 +657,12 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 type="invalid"
                 id={`validation-feedback-${compName}`}
               >
-                {validationErrors[compName]}
+                {validationErrors[compName] || " "}
               </Form.Control.Feedback>
             </InputGroup>
             {showDevMode && (
               <Button
-                variant="outline-secondary"
+                variant="outline-primary"
                 onClick={() =>
                   handleAiAssist(
                     compName,
@@ -715,7 +673,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 }
                 disabled={isAiAssisting[compName]}
                 title="AI Assist"
-                className="ms-2"
+                className="ms-2 glow-on-hover"
               >
                 {isAiAssisting[compName] ? (
                   <Spinner as="span" animation="border" size="sm" />
@@ -729,55 +687,46 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
         {compType === "slider" && (
           <div className="d-flex align-items-center">
             <InputGroup className="flex-grow-1">
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id={`tooltip-error-${compName}`}>
-                    {validationErrors[compName]}
-                  </Tooltip>
+              <Form.Range
+                name={compName}
+                min={inputDetails.min || 0}
+                max={inputDetails.max || 100}
+                step={inputDetails.step || 1}
+                value={formData[compName] || inputDetails.min || 0}
+                onChange={(e) =>
+                  handleInputChangeWithValidation(
+                    compName,
+                    e.target.value,
+                    inputDetails,
+                  )
                 }
-                show={touchedFields[compName] && !!validationErrors[compName]}
-              >
-                <Form.Range
-                  name={compName}
-                  min={inputDetails.min || 0}
-                  max={inputDetails.max || 100}
-                  step={inputDetails.step || 1}
-                  value={formData[compName] || inputDetails.min || 0}
-                  onChange={(e) =>
-                    handleInputChangeWithValidation(
-                      compName,
-                      e.target.value,
-                      inputDetails,
-                    )
-                  }
-                  onMouseEnter={() => setHoveredField(compName)}
-                  onMouseLeave={() => setHoveredField(null)}
-                  isInvalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                  }
-                  aria-invalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? `validation-feedback-${compName}`
-                      : undefined
-                  }
-                />
-              </OverlayTrigger>
+                onBlur={() => handleInputBlur(compName)}
+                onMouseEnter={() => setHoveredField(compName)}
+                onMouseLeave={() => setHoveredField(null)}
+                isInvalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                }
+                aria-invalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? "true"
+                    : "false"
+                }
+                aria-describedby={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? `validation-feedback-${compName}`
+                    : undefined
+                }
+              />
               <Form.Control.Feedback
                 type="invalid"
                 id={`validation-feedback-${compName}`}
               >
-                {validationErrors[compName]}
+                {validationErrors[compName] || " "}
               </Form.Control.Feedback>
             </InputGroup>
             {showDevMode && (
               <Button
-                variant="outline-secondary"
+                variant="outline-primary"
                 onClick={() =>
                   handleAiAssist(
                     compName,
@@ -788,80 +737,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 }
                 disabled={isAiAssisting[compName]}
                 title="AI Assist"
-                className="ms-2"
-              >
-                {isAiAssisting[compName] ? (
-                  <Spinner as="span" animation="border" size="sm" />
-                ) : (
-                  <FaMagic />
-                )}
-              </Button>
-            )}
-          </div>
-        )}
-        {compType === "slider" && (
-          <div className="d-flex align-items-center">
-            <InputGroup className="flex-grow-1">
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id={`tooltip-error-${compName}`}>
-                    {validationErrors[compName]}
-                  </Tooltip>
-                }
-                show={touchedFields[compName] && !!validationErrors[compName]}
-              >
-                <Form.Range
-                  name={compName}
-                  min={inputDetails.min || 0}
-                  max={inputDetails.max || 100}
-                  step={inputDetails.step || 1}
-                  value={formData[compName] || inputDetails.min || 0}
-                  onChange={(e) =>
-                    handleInputChangeWithValidation(
-                      compName,
-                      e.target.value,
-                      inputDetails,
-                    )
-                  }
-                  onMouseEnter={() => setHoveredField(compName)}
-                  onMouseLeave={() => setHoveredField(null)}
-                  isInvalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                  }
-                  aria-invalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? `validation-feedback-${compName}`
-                      : undefined
-                  }
-                />
-              </OverlayTrigger>
-              <Form.Control.Feedback
-                type="invalid"
-                id={`validation-feedback-${compName}`}
-              >
-                {validationErrors[compName]}
-              </Form.Control.Feedback>
-            </InputGroup>
-            {showDevMode && (
-              <Button
-                variant="outline-secondary"
-                onClick={() =>
-                  handleAiAssist(
-                    compName,
-                    formData[compName] || "",
-                    inputDetails,
-                    compType,
-                  )
-                }
-                disabled={isAiAssisting[compName]}
-                title="AI Assist"
-                className="ms-2"
+                className="ms-2 glow-on-hover"
               >
                 {isAiAssisting[compName] ? (
                   <Spinner as="span" animation="border" size="sm" />
@@ -875,53 +751,44 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
         {compType === "select" && (
           <div className="d-flex align-items-center">
             <InputGroup className="flex-grow-1">
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id={`tooltip-error-${compName}`}>
-                    {validationErrors[compName]}
-                  </Tooltip>
+              <Form.Select
+                name={compName}
+                value={formData[compName] || ""}
+                onChange={(e) =>
+                  handleInputChangeWithValidation(
+                    compName,
+                    e.target.value,
+                    inputDetails,
+                  )
                 }
-                show={touchedFields[compName] && !!validationErrors[compName]}
+                onBlur={() => handleInputBlur(compName)}
+                onMouseEnter={() => setHoveredField(compName)}
+                onMouseLeave={() => setHoveredField(null)}
+                isInvalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                }
+                aria-invalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? "true"
+                    : "false"
+                }
+                aria-describedby={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? `validation-feedback-${compName}`
+                    : undefined
+                }
               >
-                <Form.Select
-                  name={compName}
-                  value={formData[compName] || ""}
-                  onChange={(e) =>
-                    handleInputChangeWithValidation(
-                      compName,
-                      e.target.value,
-                      inputDetails,
-                    )
-                  }
-                  onMouseEnter={() => setHoveredField(compName)}
-                  onMouseLeave={() => setHoveredField(null)}
-                  isInvalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                  }
-                  aria-invalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? `validation-feedback-${compName}`
-                      : undefined
-                  }
-                >
-                  {compOptions?.map((option: string) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </Form.Select>
-              </OverlayTrigger>
+                {compOptions?.map((option: string) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </Form.Select>
               <Form.Control.Feedback
                 type="invalid"
                 id={`validation-feedback-${compName}`}
               >
-                {validationErrors[compName]}
+                {validationErrors[compName] || " "}
               </Form.Control.Feedback>
             </InputGroup>
           </div>
@@ -941,6 +808,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                   inputDetails,
                 )
               }
+              onBlur={() => handleInputBlur(compName)}
               onMouseEnter={() => setHoveredField(compName)}
               onMouseLeave={() => setHoveredField(null)}
               isInvalid={
@@ -961,55 +829,46 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
               type="invalid"
               id={`validation-feedback-${compName}`}
             >
-              {validationErrors[compName]}
+              {validationErrors[compName] || " "}
             </Form.Control.Feedback>
           </div>
         )}
         {compType === "code" && (
           <div className="d-flex align-items-center">
             <InputGroup className="flex-grow-1">
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id={`tooltip-error-${compName}`}>
-                    {validationErrors[compName]}
-                  </Tooltip>
+              <Form.Control
+                as="textarea"
+                name={compName}
+                placeholder={compPlaceholder}
+                value={formData[compName] || ""}
+                onChange={(e) =>
+                  handleInputChangeWithValidation(
+                    compName,
+                    e.target.value,
+                    inputDetails,
+                  )
                 }
-                show={touchedFields[compName] && !!validationErrors[compName]}
-              >
-                <Form.Control
-                  as="textarea"
-                  name={compName}
-                  placeholder={compPlaceholder}
-                  value={formData[compName] || ""}
-                  onChange={(e) =>
-                    handleInputChangeWithValidation(
-                      compName,
-                      e.target.value,
-                      inputDetails,
-                    )
-                  }
-                  onMouseEnter={() => setHoveredField(compName)}
-                  onMouseLeave={() => setHoveredField(null)}
-                  rows={Math.max(
-                    5,
-                    (formData[compName] || "").split("\n").length + 1,
-                  )}
-                  isInvalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                  }
-                  aria-invalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? `validation-feedback-${compName}`
-                      : undefined
-                  }
-                />
-              </OverlayTrigger>
+                onBlur={() => handleInputBlur(compName)}
+                onMouseEnter={() => setHoveredField(compName)}
+                onMouseLeave={() => setHoveredField(null)}
+                rows={Math.max(
+                  5,
+                  (formData[compName] || "").split("\n").length + 1,
+                )}
+                isInvalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                }
+                aria-invalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? "true"
+                    : "false"
+                }
+                aria-describedby={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? `validation-feedback-${compName}`
+                    : undefined
+                }
+              />
               {formData[compName] && (
                 <Button
                   variant="outline-secondary"
@@ -1023,12 +882,12 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 type="invalid"
                 id={`validation-feedback-${compName}`}
               >
-                {validationErrors[compName]}
+                {validationErrors[compName] || " "}
               </Form.Control.Feedback>
             </InputGroup>
             {showDevMode && (
               <Button
-                variant="outline-secondary"
+                variant="outline-primary"
                 onClick={() =>
                   handleAiAssist(
                     compName,
@@ -1039,7 +898,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
                 }
                 disabled={isAiAssisting[compName]}
                 title="AI Assist"
-                className="ms-2"
+                className="ms-2 glow-on-hover"
               >
                 {isAiAssisting[compName] ? (
                   <Spinner as="span" animation="border" size="sm" />
@@ -1052,119 +911,95 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
         )}
         {compType === "multiselect" && (
           <div className="w-100">
-            <OverlayTrigger
-              placement="right"
-              overlay={
-                <Tooltip id={`tooltip-error-${compName}`}>
-                  {validationErrors[compName]}
-                </Tooltip>
-              }
-              show={
-                (touchedFields[compName] && !!validationErrors[compName]) ||
-                (hoveredField === compName && !!validationErrors[compName])
-              }
-            >
-              <>
-                <InputGroup>
-                  <Form.Select
-                    name={compName}
-                    value={formData[compName] || []}
-                    onChange={(e) =>
-                      handleInputChangeWithValidation(
-                        compName,
-                        Array.from(
-                          e.target.selectedOptions,
-                          (option) => option.value,
-                        ),
-                        inputDetails,
-                      )
-                    }
-                    onMouseEnter={() => setHoveredField(compName)}
-                    onMouseLeave={() => setHoveredField(null)}
-                    className="form-select"
-                    multiple
-                    isInvalid={
-                      touchedFields[compName] && !!validationErrors[compName]
-                    }
-                    aria-invalid={
-                      touchedFields[compName] && !!validationErrors[compName]
-                        ? "true"
-                        : "false"
-                    }
-                    aria-describedby={
-                      touchedFields[compName] && !!validationErrors[compName]
-                        ? `validation-feedback-${compName}`
-                        : undefined
-                    }
-                  >
-                    {compOptions?.map((opt: string) => (
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
-                    ))}
-                  </Form.Select>
-                  <Form.Control.Feedback
-                    type="invalid"
-                    id={`validation-feedback-${compName}`}
-                  >
-                    {validationErrors[compName]}
-                  </Form.Control.Feedback>
-                </InputGroup>
-              </>
-            </OverlayTrigger>
+            <InputGroup>
+              <Form.Select
+                name={compName}
+                value={formData[compName] || []}
+                onChange={(e) =>
+                  handleInputChangeWithValidation(
+                    compName,
+                    Array.from(
+                      e.target.selectedOptions,
+                      (option) => option.value,
+                    ),
+                    inputDetails,
+                  )
+                }
+                onBlur={() => handleInputBlur(compName)}
+                onMouseEnter={() => setHoveredField(compName)}
+                onMouseLeave={() => setHoveredField(null)}
+                className="form-select"
+                multiple
+                isInvalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                }
+                aria-invalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? "true"
+                    : "false"
+                }
+                aria-describedby={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? `validation-feedback-${compName}`
+                    : undefined
+                }
+              >
+                {compOptions?.map((opt: string) => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                ))}
+              </Form.Select>
+              <Form.Control.Feedback
+                type="invalid"
+                id={`validation-feedback-${compName}`}
+              >
+                {validationErrors[compName] || " "}
+              </Form.Control.Feedback>
+            </InputGroup>
           </div>
         )}
         {compType === "image" && (
           <div className="d-flex align-items-center">
             <InputGroup className="flex-grow-1">
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id={`tooltip-error-${compName}`}>
-                    {validationErrors[compName]}
-                  </Tooltip>
+              <Form.Control
+                type="file"
+                name={compName}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  if (e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                      handleInputChangeWithValidation(
+                        compName,
+                        event.target?.result as string,
+                        inputDetails,
+                      );
+                    };
+                    reader.readAsDataURL(e.target.files[0]);
+                  }
+                }}
+                onBlur={() => handleInputBlur(compName)}
+                onMouseEnter={() => setHoveredField(compName)}
+                onMouseLeave={() => setHoveredField(null)}
+                isInvalid={
+                  touchedFields[compName] && !!validationErrors[compName]
                 }
-                show={touchedFields[compName] && !!validationErrors[compName]}
-              >
-                <Form.Control
-                  type="file"
-                  accept="image/*"
-                  name={compName}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    if (e.target.files && e.target.files[0]) {
-                      const reader = new FileReader();
-                      reader.onload = (event) => {
-                        handleInputChangeWithValidation(
-                          compName,
-                          event.target?.result as string,
-                          inputDetails,
-                        );
-                      };
-                      reader.readAsDataURL(e.target.files[0]);
-                    }
-                  }}
-                  onMouseEnter={() => setHoveredField(compName)}
-                  onMouseLeave={() => setHoveredField(null)}
-                  isInvalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                  }
-                  aria-invalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? `validation-feedback-${compName}`
-                      : undefined
-                  }
-                />
-              </OverlayTrigger>
+                aria-invalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? "true"
+                    : "false"
+                }
+                aria-describedby={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? `validation-feedback-${compName}`
+                    : undefined
+                }
+              />
               <Form.Control.Feedback
                 type="invalid"
                 id={`validation-feedback-${compName}`}
               >
-                {validationErrors[compName]}
+                {validationErrors[compName] || " "}
               </Form.Control.Feedback>
             </InputGroup>
           </div>
@@ -1172,53 +1007,44 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
         {compType === "file" && (
           <div className="d-flex align-items-center">
             <InputGroup className="flex-grow-1">
-              <OverlayTrigger
-                placement="right"
-                overlay={
-                  <Tooltip id={`tooltip-error-${compName}`}>
-                    {validationErrors[compName]}
-                  </Tooltip>
+              <Form.Control
+                type="file"
+                name={compName}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  if (e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                      handleInputChangeWithValidation(
+                        compName,
+                        event.target?.result as string,
+                        inputDetails,
+                      );
+                    };
+                    reader.readAsDataURL(e.target.files[0]);
+                  }
+                }}
+                onBlur={() => handleInputBlur(compName)}
+                onMouseEnter={() => setHoveredField(compName)}
+                onMouseLeave={() => setHoveredField(null)}
+                isInvalid={
+                  touchedFields[compName] && !!validationErrors[compName]
                 }
-                show={touchedFields[compName] && !!validationErrors[compName]}
-              >
-                <Form.Control
-                  type="file"
-                  name={compName}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    if (e.target.files && e.target.files[0]) {
-                      const reader = new FileReader();
-                      reader.onload = (event) => {
-                        handleInputChangeWithValidation(
-                          compName,
-                          event.target?.result as string,
-                          inputDetails,
-                        );
-                      };
-                      reader.readAsDataURL(e.target.files[0]);
-                    }
-                  }}
-                  onMouseEnter={() => setHoveredField(compName)}
-                  onMouseLeave={() => setHoveredField(null)}
-                  isInvalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                  }
-                  aria-invalid={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? "true"
-                      : "false"
-                  }
-                  aria-describedby={
-                    touchedFields[compName] && !!validationErrors[compName]
-                      ? `validation-feedback-${compName}`
-                      : undefined
-                  }
-                />
-              </OverlayTrigger>
+                aria-invalid={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? "true"
+                    : "false"
+                }
+                aria-describedby={
+                  touchedFields[compName] && !!validationErrors[compName]
+                    ? `validation-feedback-${compName}`
+                    : undefined
+                }
+              />
               <Form.Control.Feedback
                 type="invalid"
                 id={`validation-feedback-${compName}`}
               >
-                {validationErrors[compName]}
+                {validationErrors[compName] || " "}
               </Form.Control.Feedback>
             </InputGroup>
           </div>
@@ -1237,17 +1063,34 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
           <div className="flex-grow-1 d-flex flex-column justify-content-center align-items-center placeholder-content">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="64"
-              height="64"
               fill="currentColor"
-              className="bi bi-card-list mb-3 text-muted"
+              className="bi bi-card-list mb-3"
               viewBox="0 0 16 16"
+              style={{
+                width: "clamp(40px, 8vw, 64px)",
+                height: "clamp(40px, 8vw, 64px)",
+                color: "var(--accent-color)",
+              }}
             >
               <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
               <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
             </svg>
-            <h5 className="text-muted">Pilih Kerangka Kerja</h5>
-            <p className="text-muted small text-center">
+            <h5
+              className="text-center"
+              style={{
+                fontSize: "clamp(1.2rem, 2.5vw, 1.5rem)",
+                color: "var(--text-color)",
+              }}
+            >
+              Pilih Kerangka Kerja
+            </h5>
+            <p
+              className="small text-center"
+              style={{
+                fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
+                color: "var(--secondary-text-color)",
+              }}
+            >
               Silakan pilih kategori dan kerangka kerja dari panel di sebelah
               kiri untuk melihat komponennya di sini.
             </p>

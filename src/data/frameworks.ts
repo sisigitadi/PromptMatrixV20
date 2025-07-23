@@ -90,6 +90,8 @@ export type PromptFrameworksType = {
 };
 
 export const PROMPT_FRAMEWORKS: PromptFrameworksType = {
+  "Koleksi & Inovasi": {},
+
   "Teks & Konten": {
     "Penulisan & Konten": {
       "Penulisan Artikel SEO": {
@@ -9150,5 +9152,6 @@ export const CATEGORY_ORDER = [
   "Audio & Musik",
   "Prompt Ringkas",
   "Prompt Proyek",
+  "Koleksi & Inovasi",
   "Teks & Konten",
 ];
