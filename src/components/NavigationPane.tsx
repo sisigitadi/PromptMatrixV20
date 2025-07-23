@@ -45,7 +45,7 @@ const NavigationPane: React.FC<NavigationPaneProps> = ({
 }) => {
   return (
     <Card className="flex-grow-1 h-100">
-      <Card.Body className="d-flex flex-column p-4">
+      <Card.Body className="d-flex flex-column p-4 text-start">
         <h2 className="h5 pb-3 mb-3 border-bottom">
           1. Pilih Kategori / Cari Kerangka Kerja:
         </h2>
@@ -135,7 +135,7 @@ const NavigationPane: React.FC<NavigationPaneProps> = ({
                                   .map(([name, details]) => (
                                     <Button
                                       key={name}
-                                      className={`category-card w-100 text-start p-3 category-button-dynamic ${categoryCssNameMap[categoryName]}`}
+                                      className={`category-card w-100 text-center p-3 category-button-dynamic framework-text-single-line ${categoryCssNameMap[categoryName]}`}
                                       onClick={() =>
                                         handleFrameworkSelect(
                                           name,

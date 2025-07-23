@@ -43,7 +43,7 @@ const SavePromptForm: React.FC<SavePromptFormProps> = ({
 
   return (
     <Card className="mt-3">
-      <Card.Body>
+      <Card.Body className="text-start">
         <Card.Title>Simpan Prompt</Card.Title>
         <Form>
           <Button

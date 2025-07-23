@@ -1332,6 +1332,13 @@ p, li, span, div {
     font-size: 0.7rem;
     padding: 0.2rem 0.4rem;
   }
+
+  .framework-text-single-line strong {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block; /* Ensure it takes up its own line for ellipsis to work */
+  }
 }
 
 /* Dynamic Category Button Styles */

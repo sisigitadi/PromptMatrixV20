@@ -15,7 +15,7 @@ const SavedPromptsInline: React.FC<SavedPromptsInlineProps> = ({
   return (
     <Card className="mt-3">
       <Card.Header>Prompt Tersimpan</Card.Header>
-      <Card.Body className="p-2">
+      <Card.Body className="p-2 text-start">
         {savedPrompts.length === 0 ? (
           <p className="mb-0 text-muted small">
             Belum ada prompt yang disimpan.

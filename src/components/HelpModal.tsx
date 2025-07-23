@@ -47,7 +47,7 @@ const HelpModal: React.FC<HelpModalProps> = ({ show, onHide }) => {
           {documentTitle || "Prompt Matrix 2.0 - Bantuan"}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="modal-body-themed">
+      <Modal.Body className="modal-body-themed text-start">
         {markdownContent ? (
           <>
             <Button

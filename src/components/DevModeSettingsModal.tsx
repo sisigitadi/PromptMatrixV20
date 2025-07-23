@@ -40,7 +40,7 @@ const DevModeSettingsModal: React.FC<DevModeSettingsModalProps> = ({
       <Modal.Header closeButton className="modal-header-themed">
         <Modal.Title>Pengaturan Mode Pengembang</Modal.Title>
       </Modal.Header>
-      <Modal.Body className="modal-body-themed">
+      <Modal.Body className="modal-body-themed text-start">
         <Form.Group className="mb-3" controlId="geminiModelSelect">
           <Form.Label
             className="small mb-1"

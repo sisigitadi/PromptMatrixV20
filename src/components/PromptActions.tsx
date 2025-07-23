@@ -84,7 +84,7 @@ const PromptActions: React.FC<PromptActionsProps> = ({
 
   return (
     <Card className="mt-3">
-      <Card.Body>
+      <Card.Body className="text-start">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <Button
             variant="primary"

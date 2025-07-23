@@ -95,7 +95,7 @@ const SavedPromptsDisplay: React.FC<SavedPromptsDisplayProps> = ({
       <Modal.Header closeButton className="modal-header-themed">
         <Modal.Title>📚 Prompt Tersimpan & Riwayat</Modal.Title>
       </Modal.Header>
-      <Modal.Body className="modal-body-themed">
+      <Modal.Body className="modal-body-themed text-start">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <div className="d-flex">
             <Button

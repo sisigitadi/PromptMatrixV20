@@ -137,7 +137,7 @@ const InputSelectionModal: React.FC<InputSelectionModalProps> = ({
       <Modal.Header closeButton className="modal-header-themed">
         <Modal.Title>Gunakan Output sebagai Input</Modal.Title>
       </Modal.Header>
-      <Modal.Body className="modal-body-themed">
+      <Modal.Body className="modal-body-themed text-start">
         <InputGroup className="mb-3">
           <Form.Control
             type="text"

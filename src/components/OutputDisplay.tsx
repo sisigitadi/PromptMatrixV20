@@ -206,7 +206,7 @@ const OutputDisplay: React.FC<OutputDisplayProps> = ({
             </Button>
           </ButtonGroup>
         </Card.Header>
-        <Card.Body className="d-flex flex-column">
+        <Card.Body className="d-flex flex-column text-start">
           {/* Output Display Section (approx 75%) */}
           <div
             style={{ flexGrow: 1, display: "flex", flexDirection: "column" }}

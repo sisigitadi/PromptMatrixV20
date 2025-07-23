@@ -41,7 +41,7 @@ const AiResponseModal: React.FC<AiResponseModalProps> = ({
           <FaRobot className="me-2" /> Respons AI
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="modal-body-themed">
+      <Modal.Body className="modal-body-themed text-start">
         <div aria-live="polite">
           {isGenerating ? (
             <div className="text-center my-5">

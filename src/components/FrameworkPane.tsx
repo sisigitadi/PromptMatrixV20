@@ -1055,7 +1055,7 @@ const FrameworkPane: React.FC<FrameworkPaneProps> = ({
 
   return (
     <Card className="flex-grow-1 h-100">
-      <Card.Body className="d-flex flex-column">
+      <Card.Body className="d-flex flex-column text-start">
         <h2 className="h5 pb-3 mb-3 border-bottom">
           3. Komponen Kerangka Kerja:
         </h2>
