@@ -578,11 +578,19 @@
   border-radius: 0.5rem;
   padding: 0.75rem 1rem 0.75rem 1.25rem !important; /* Adjust padding due to border */
   color: var(--text-color);
-  font-size: clamp(0.85rem, 1.5vw, 1rem); /* Adjust font size to be not too small */
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem); /* Make subcategory text slightly smaller than category */
   white-space: normal; /* Allow text to wrap */
   overflow: visible; /* Allow content to be visible */
   text-overflow: clip; /* Prevent ellipsis */
   word-break: break-word; /* Break long words */
+}
+
+@media (max-width: 576px) {
+  .subcategory-header {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .subcategory-header.btn-link {
@@ -1342,9 +1350,14 @@ p, li, span, div {
 }
 
 /* Dynamic Category Button Styles */
-/* Dynamic Category Button Styles */
 .category-button-dynamic {
   color: var(--text-color);
+  font-size: clamp(1rem, 2vw, 1.2rem); /* Make category text larger */
+  text-align: center; /* Center category text */
+  white-space: normal; /* Allow text to wrap */
+  overflow: visible; /* Ensure text is not hidden */
+  text-overflow: clip; /* Prevent ellipsis */
+  word-break: break-word; /* Break long words */
 }
 
 .category-button-dynamic.audio:hover {
